@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {TitleCasePipe} from "@angular/common";
+import { TitleCasePipe } from "@angular/common";
 
 @Component({
   selector: 'app-root',
