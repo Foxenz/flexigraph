@@ -10,7 +10,9 @@ export const routes: Routes = [
   {
     path: 'chart-zone',
     loadComponent: () =>
-      import('./feature/chart-zone/chart-zone.component').then(m => m.ChartZoneComponent),
+      import('./feature/chart-zone/chart-zone.component').then(
+        m => m.ChartZoneComponent
+      ),
   },
   {
     path: 'not-found',
@@ -24,4 +26,3 @@ export const routes: Routes = [
     redirectTo: 'not-found',
   },
 ];
-
