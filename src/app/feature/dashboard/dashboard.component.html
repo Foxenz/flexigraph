@@ -1,0 +1,15 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav class="aside-container" #sidenav mode="side" [(opened)]="opened">
+    <app-chart-creator />
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="example-header">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+    <app-chart-zone />
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -8,10 +8,10 @@ export const routes: Routes = [
       import('./landing/landing.component').then(m => m.LandingComponent),
   },
   {
-    path: 'chart-zone',
+    path: 'dashboard',
     loadComponent: () =>
-      import('./feature/chart-zone/chart-zone.component').then(
-        m => m.ChartZoneComponent
+      import('./feature/dashboard/dashboard.components').then(
+        m => m.DashboardComponent
       ),
   },
   {
