@@ -5,6 +5,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIcon } from '@angular/material/icon';
 import { ChartCreatorComponent } from './components/chart-creator/chart-creator.component';
 import { ChartZoneComponent } from './components/chart-zone/chart-zone.component';
+import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,15 +18,13 @@ import { ChartZoneComponent } from './components/chart-zone/chart-zone.component
     MatIcon,
     ChartCreatorComponent,
     ChartZoneComponent,
+    CdkDrag,
+    CdkDragHandle,
+    FormsModule,
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.components.scss',
+  styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
-  events: string[] = [];
-  opened: boolean;
-
-  constructor() {
-    this.opened = true;
-  }
+  opened: boolean = true;
 }

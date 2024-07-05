@@ -1,15 +1,13 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav class="aside-container" #sidenav mode="side" [(opened)]="opened">
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="opened">
     <app-chart-creator />
-  </mat-sidenav>
+  </mat-drawer>
 
-  <mat-sidenav-content>
-    <div class="example-header">
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-    </div>
+  <div class="example-sidenav-content">
+    <button class="icon" mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
 
     <app-chart-zone />
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+</mat-drawer-container>
