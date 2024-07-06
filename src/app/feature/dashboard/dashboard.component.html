@@ -1,9 +1,9 @@
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="opened">
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side" [(opened)]="opened">
     <app-chart-creator />
   </mat-drawer>
 
-  <div class="example-sidenav-content">
+  <div class="sidenav-content">
     <button class="icon" mat-icon-button (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
