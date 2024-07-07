@@ -1,17 +1,13 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import {
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
-import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ChartZoneComponent } from './components/chart-zone/chart-zone.component';
-import { ChartCreatorComponent } from './components/chart-creator/chart-creator.component';
+import { ChartFormComponent } from './components/chart-form/chart-form.component';
+import { ChartListComponent } from './components/chart-list/chart-list.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,15 +21,14 @@ import { ChartCreatorComponent } from './components/chart-creator/chart-creator.
     MatSidenavModule,
     MatListModule,
     ChartZoneComponent,
-    ChartCreatorComponent,
+    ChartFormComponent,
+    ChartListComponent,
   ],
 })
 export class DashboardComponent implements OnDestroy {
-  @ViewChild(MatSidenav) sidenav!: MatSidenav;
-  @ViewChild(ChartZoneComponent) chartZone!: ChartZoneComponent;
   mobileQuery: MediaQueryList;
 
-  private _mobileQueryListener: () => void;
+  private readonly _mobileQueryListener: () => void;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -43,10 +38,5 @@ export class DashboardComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
-  }
-
-  onToggleSidenav() {
-    this.sidenav.toggle();
-    this.chartZone.onRefreshCharts();
   }
 }

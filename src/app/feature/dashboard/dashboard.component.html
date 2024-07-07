@@ -1,24 +1,28 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-  <mat-toolbar color="primary" class="example-toolbar">
-    <button mat-icon-button (click)="onToggleSidenav()">
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+  <!-- ToolBar -->
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button (click)="side.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <h1 class="example-app-name">FlexiGraph</h1>
+    <h1 class="app-name">FlexiGraph</h1>
   </mat-toolbar>
 
   <mat-sidenav-container
-    class="example-sidenav-container"
+    class="sidenav-container"
     [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <!--  SideNav  -->
     <mat-sidenav
+      #side
       [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56">
       <!-- Liste de tous les graphiques crée -->
       <div class="list">
-        <app-chart-creator />
+        <app-chart-list />
       </div>
     </mat-sidenav>
 
+    <!--  Content  -->
     <mat-sidenav-content>
       <app-chart-zone />
     </mat-sidenav-content>

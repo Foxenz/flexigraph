@@ -6,7 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
   selector: 'app-chart-creator',
   standalone: true,
   imports: [MatInputModule, MatSelectModule],
-  templateUrl: './chart-creator.component.html',
-  styleUrl: './chart-creator.component.scss',
+  templateUrl: './chart-form.component.html',
+  styleUrl: './chart-form.component.scss',
 })
-export class ChartCreatorComponent {}
+export class ChartFormComponent {}
