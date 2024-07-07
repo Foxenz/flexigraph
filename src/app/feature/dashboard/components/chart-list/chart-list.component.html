@@ -1,0 +1,7 @@
+<div>
+  @for (chart of charts; track chart.id) {
+    <p>{{ chart.title }}</p>
+  } @empty {
+    <p>Aucun graphique existant</p>
+  }
+</div>
