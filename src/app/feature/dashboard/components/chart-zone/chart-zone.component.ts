@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
-import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { Component, ViewChildren } from '@angular/core';
 import { ChartCardComponent } from '../chart-card/chart-card.component';
 
 @Component({
   selector: 'app-chart-zone',
   standalone: true,
-  imports: [CdkDrag, CdkDragHandle, ChartCardComponent],
+  imports: [ChartCardComponent],
   templateUrl: './chart-zone.component.html',
   styleUrl: './chart-zone.component.scss',
 })
-export class ChartZoneComponent {}
+export class ChartZoneComponent {
+  @ViewChildren(ChartCardComponent) chartCards!: ChartCardComponent[];
+
+  onRefreshCharts() {
+    this.chartCards.forEach(chartCard => chartCard.refresh());
+  }
+}

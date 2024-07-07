@@ -1,1 +1,15 @@
-<p>chart-creator works!</p>
+<div class="chart-form">
+  <mat-label>Titre</mat-label>
+  <input matInput placeholder="Titre du graphique" required />
+
+  <mat-label>Type de graphique</mat-label>
+
+  <select matNativeControl required>
+    <option value="volvo">Circulaire</option>
+    <option value="saab">Camembert</option>
+    <option value="mercedes">Linéaire</option>
+  </select>
+
+  <mat-label>Données</mat-label>
+  <textarea matInput placeholder="Données du graphique" required></textarea>
+</div>
