@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ChartZoneComponent } from './components/chart-zone/chart-zone.component';
-import { ChartFormComponent } from './components/chart-form/chart-form.component';
+import { DialogCreateChartComponent } from './components/dialogs/dialog-create-chart/dialog-create-chart.component';
 import { ChartListComponent } from './components/chart-list/chart-list.component';
 
 @Component({
@@ -21,7 +21,7 @@ import { ChartListComponent } from './components/chart-list/chart-list.component
     MatSidenavModule,
     MatListModule,
     ChartZoneComponent,
-    ChartFormComponent,
+    DialogCreateChartComponent,
     ChartListComponent,
   ],
 })

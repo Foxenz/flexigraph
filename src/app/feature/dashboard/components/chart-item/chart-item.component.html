@@ -1,1 +1,20 @@
-<p>chart-item works!</p>
+<mat-card appearance="outlined">
+  <mat-card-content>{{ chart.title }}</mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-icon-button (click)="changeVisibility()">
+      @if (chart.visible) {
+        <mat-icon>visibility</mat-icon>
+      } @else {
+        <mat-icon>visibility_off</mat-icon>
+      }
+    </button>
+
+    <button mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="openDialog()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

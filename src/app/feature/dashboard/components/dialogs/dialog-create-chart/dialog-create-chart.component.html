@@ -1,0 +1,34 @@
+<div class="chart-form">
+  <h2 mat-dialog-title>Créer un nouveau graphique</h2>
+  <mat-form-field appearance="outline">
+    <mat-label>Titre</mat-label>
+    <input matInput [(ngModel)]="title" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Type de graphique</mat-label>
+    <mat-select [(ngModel)]="type">
+      <mat-option value="Circulaire">Circulaire</mat-option>
+      <mat-option value="Camembert">Camembert</mat-option>
+      <mat-option value="Linéaire">Linéaire</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Données</mat-label>
+    <mat-select [(ngModel)]="data">
+      <mat-option [value]="[21, 12]">Chiffre d'affaire</mat-option>
+      <mat-option [value]="[15, 8]">Bénéfice</mat-option>
+      <mat-option [value]="[10, 5]">Perte</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button (click)="onNoClick()">Annuler</button>
+    <button
+      mat-raised-button
+      (click)="createChart()"
+      color="primary"
+      [disabled]="!title || !type || data.length === 0">
+      Créer
+    </button>
+  </mat-dialog-actions>
+</div>

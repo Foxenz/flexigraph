@@ -1,7 +1,11 @@
 <div>
   @for (chart of charts; track chart.id) {
-    <p>{{ chart.title }}</p>
+    <app-chart-item [chart]="chart"></app-chart-item>
   } @empty {
     <p>Aucun graphique existant</p>
   }
+
+  <button mat-fab color="primary" aria-label="Add" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>

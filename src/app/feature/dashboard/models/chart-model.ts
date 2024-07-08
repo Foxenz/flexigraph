@@ -3,4 +3,5 @@ export interface Chart {
   title: string;
   type: string;
   data: number[];
+  visible: boolean;
 }
