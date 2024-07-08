@@ -32,4 +32,8 @@ export class DialogDeleteChartComponent {
   onNoClick() {
     this.dialogRef.close();
   }
+
+  onYesClick() {
+    this.dialogRef.close(this.data.chart);
+  }
 }

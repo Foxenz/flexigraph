@@ -1,5 +1,5 @@
 export interface Chart {
-  id: number;
+  id: string;
   title: string;
   type: string;
   data: number[];

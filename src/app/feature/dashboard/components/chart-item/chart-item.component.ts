@@ -10,6 +10,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteChartComponent } from '../dialogs/dialog-delete-chart/dialog-delete-chart.component';
 import { filter } from 'rxjs';
+import { ChartManager } from '../../../../shared/managers/chart.manager';
 
 @Component({
   selector: 'app-chart-item',
@@ -27,7 +28,6 @@ import { filter } from 'rxjs';
 })
 export class ChartItemComponent {
   @Input() chart!: Chart;
-
   readonly dialog = inject(MatDialog);
 
   openDialog() {
@@ -44,12 +44,10 @@ export class ChartItemComponent {
   }
 
   deleteChart(chart: Chart): void {
-    // Call le service pour delete le chart
-    console.log('Deleting chart', chart);
+    ChartManager.deleteChart(chart.id);
   }
 
   changeVisibility(): void {
-    // Call le service pour changer la visibility du chart (visible ou non)
-    this.chart.visible = !this.chart.visible;
+    ChartManager.switchVisibility(this.chart.id);
   }
 }

@@ -6,7 +6,7 @@
   <button mat-raised-button (click)="onNoClick()">Annuler</button>
   <button
     mat-raised-button
-    [mat-dialog-close]="data"
+    (click)="onYesClick()"
     cdkFocusInitial
     color="primary">
     Supprimer
