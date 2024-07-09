@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { Chart } from '../../models/chart-model';
 
 @Component({
   selector: 'app-chart-card',
@@ -9,5 +10,10 @@ import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
   styleUrl: './chart-card.component.scss',
 })
 export class ChartCardComponent {
-  dragPosition = { x: 100, y: 100 };
+  @Input() chart!: Chart;
+
+  // Centrer le nouveau graphique crée
+  dragPosition = { x: 100, y: 0 };
+
+  // créer des inputs pour recevoir les données du chart
 }

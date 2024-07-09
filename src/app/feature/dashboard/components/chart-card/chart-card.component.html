@@ -3,7 +3,12 @@
   cdkDragBoundary=".zone-draggable"
   cdkDrag
   [cdkDragFreeDragPosition]="dragPosition">
-  I can only be dragged using the handle
+  <div style="display: flex; flex-direction: column">
+    <p>{{ chart.title }}</p>
+    <p>{{ chart.id }}</p>
+    <p>{{ chart.type }}</p>
+    <p>{{ chart.data }}</p>
+  </div>
 
   <div class="handle" cdkDragHandle>
     <svg width="24px" fill="currentColor" viewBox="0 0 24 24">

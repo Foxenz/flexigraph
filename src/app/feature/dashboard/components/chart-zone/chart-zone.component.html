@@ -1,3 +1,7 @@
 <div class="zone-draggable">
-  <app-chart-card />
+  @for (chart of charts; track chart.id) {
+    @if (chart.visible) {
+      <app-chart-card [chart]="chart"></app-chart-card>
+    }
+  }
 </div>
