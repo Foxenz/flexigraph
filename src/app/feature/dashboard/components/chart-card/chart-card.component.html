@@ -7,7 +7,9 @@
     <p>{{ chart.title }}</p>
     <p>{{ chart.id }}</p>
     <p>{{ chart.type }}</p>
-    <p>{{ chart.data }}</p>
+    @for (data of chart.data; track data.label) {
+      <p>{{ data.label }}: {{ data.valuePerMonth }}</p>
+    }
   </div>
 
   <div class="handle" cdkDragHandle>

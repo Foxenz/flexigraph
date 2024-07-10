@@ -7,31 +7,54 @@ export class ChartManager {
     {
       id: '0270b747',
       title: 'Chart 1',
-      type: 'line',
-      data: [1, 2, 3, 4, 5],
+      type: 'Linéaire',
+      data: [
+        {
+          label: 'Bénéfice',
+          valuePerMonth: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+        },
+        {
+          label: 'Dépense',
+          valuePerMonth: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+        },
+      ],
       visible: true,
     },
     {
       id: '0220b743',
       title: 'Chart 2',
-      type: 'bar',
-      data: [5, 4, 3, 2, 1],
+      type: 'Batônnet',
+      data: [
+        {
+          label: 'Bénéfice',
+          valuePerMonth: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+        },
+        {
+          label: 'Dépense',
+          valuePerMonth: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+        },
+      ],
       visible: false,
     },
     {
       id: '0420b652',
       title: 'Chart 3',
-      type: 'pie',
-      data: [1, 2, 3, 4, 5],
+      type: 'Circulaire',
+      data: [
+        {
+          label: 'Bénéfice',
+          valuePerMonth: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+        },
+        {
+          label: 'Dépense',
+          valuePerMonth: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+        },
+      ],
       visible: true,
     },
   ];
 
   constructor() {}
-
-  static showData(): void {
-    console.log(ChartManager.charts);
-  }
 
   static createChart(chart: Chart): void {
     // Crée un id unique

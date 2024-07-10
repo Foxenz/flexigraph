@@ -7,17 +7,19 @@
   <mat-form-field appearance="outline">
     <mat-label>Type de graphique</mat-label>
     <mat-select [(ngModel)]="type">
-      <mat-option value="Circulaire">Circulaire</mat-option>
+      <mat-option value="Batonnet">Bâtonnet</mat-option>
       <mat-option value="Camembert">Camembert</mat-option>
       <mat-option value="Linéaire">Linéaire</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Données</mat-label>
-    <mat-select [(ngModel)]="data">
-      <mat-option [value]="[21, 12]">Chiffre d'affaire</mat-option>
-      <mat-option [value]="[15, 8]">Bénéfice</mat-option>
-      <mat-option [value]="[10, 5]">Perte</mat-option>
+    <mat-select [(ngModel)]="data" multiple>
+      @for (oneData of listOfData; track oneData.label) {
+        <mat-option [value]="oneData">
+          {{ oneData.label }}
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 
@@ -27,7 +29,7 @@
       mat-raised-button
       (click)="createChart()"
       color="primary"
-      [disabled]="!title || !type || data.length === 0">
+      [disabled]="!title || !type || !data.length">
       Créer
     </button>
   </mat-dialog-actions>
