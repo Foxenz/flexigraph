@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteChartComponent } from '../dialogs/dialog-delete-chart/dialog-delete-chart.component';
 import { filter } from 'rxjs';
 import { ChartManager } from '../../../../shared/managers/chart.manager';
+import { DialogCreateChartComponent } from '../dialogs/dialog-create-chart/dialog-create-chart.component';
+import { DialogUpdateChartComponent } from '../dialogs/dialog-update-chart/dialog-update-chart.component';
 
 @Component({
   selector: 'app-chart-item',
@@ -43,11 +45,28 @@ export class ChartItemComponent {
       .subscribe(result => this.deleteChart(result));
   }
 
-  deleteChart(chart: Chart): void {
-    ChartManager.deleteChart(chart.id);
+  openUpdateDialog(): void {
+    const dialogRef = this.dialog.open(DialogUpdateChartComponent, {
+      data: {
+        chart: this.chart,
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(filter(element => element != undefined))
+      .subscribe(result => this.updateChart(result));
   }
 
   changeVisibility(): void {
     ChartManager.switchVisibility(this.chart.id);
+  }
+
+  updateChart(chart: Chart): void {
+    ChartManager.updateChart(this.chart.id, chart);
+  }
+
+  deleteChart(chart: Chart): void {
+    ChartManager.deleteChart(chart.id);
   }
 }

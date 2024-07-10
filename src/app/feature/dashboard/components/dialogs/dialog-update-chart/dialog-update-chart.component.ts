@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { Data } from '../../../models/chart-model';
+import { Chart, Data } from '../../../models/chart-model';
 import { ChartManager } from '../../../../../shared/managers/chart.manager';
 
 @Component({
@@ -22,24 +23,27 @@ import { ChartManager } from '../../../../../shared/managers/chart.manager';
     FormsModule,
     MatDialogTitle,
   ],
-  templateUrl: './dialog-create-chart.component.html',
-  styleUrl: './dialog-create-chart.component.scss',
+  templateUrl: './dialog-update-chart.component.html',
+  styleUrl: './dialog-update-chart.component.scss',
 })
-export class DialogCreateChartComponent {
-  title: string = '';
-  type: string = '';
-  data: Data[] = [];
+export class DialogUpdateChartComponent {
+  title: string = this.initialData.chart.title;
+  type: string = this.initialData.chart.type;
+  data: Data[] = this.initialData.chart.data;
 
   listOfData: Data[] = ChartManager.listOfData;
   listOfTypesChart: string[] = ChartManager.listOfTypesChart;
 
-  constructor(public dialogRef: MatDialogRef<DialogCreateChartComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<DialogUpdateChartComponent>,
+    @Inject(MAT_DIALOG_DATA) public initialData: { chart: Chart }
+  ) {}
 
   onNoClick() {
     this.dialogRef.close();
   }
 
-  createChart() {
+  updateChart() {
     this.dialogRef.close({
       title: this.title,
       type: this.type,

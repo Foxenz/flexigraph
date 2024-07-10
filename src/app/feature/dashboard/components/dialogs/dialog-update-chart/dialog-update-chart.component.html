@@ -1,5 +1,5 @@
 <div class="chart-form">
-  <h2 mat-dialog-title>Créer un nouveau graphique</h2>
+  <h2 mat-dialog-title>Modifier votre graphique</h2>
   <mat-form-field appearance="outline">
     <mat-label>Titre</mat-label>
     <input matInput [(ngModel)]="title" />
@@ -17,7 +17,7 @@
   <mat-form-field appearance="outline">
     <mat-label>Données</mat-label>
     <mat-select [(ngModel)]="data" multiple>
-      @for (oneData of listOfData; track oneData.label) {
+      @for (oneData of listOfData; track oneData) {
         <mat-option [value]="oneData">
           {{ oneData.label }}
         </mat-option>
@@ -29,7 +29,7 @@
     <button mat-raised-button (click)="onNoClick()">Annuler</button>
     <button
       mat-raised-button
-      (click)="createChart()"
+      (click)="updateChart()"
       color="primary"
       [disabled]="!title || !type || !data.length">
       Créer
