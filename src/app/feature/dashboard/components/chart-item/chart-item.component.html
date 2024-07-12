@@ -1,7 +1,7 @@
 <mat-card appearance="outlined">
   <mat-card-content>{{ chart.title }}</mat-card-content>
   <mat-card-actions align="end">
-    <button mat-icon-button (click)="changeVisibility()">
+    <button mat-icon-button (click)="changeVisibility.next(chart)">
       @if (chart.visible) {
         <mat-icon>visibility</mat-icon>
       } @else {

@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Chart } from '../../models/chart-model';
 import {
   MatCard,
@@ -31,6 +31,10 @@ export class ChartItemComponent {
   @Input() chart!: Chart;
   readonly dialog = inject(MatDialog);
 
+  @Output() public changeVisibility = new EventEmitter<Chart>();
+  @Output() public updateChart = new EventEmitter<Chart>();
+  @Output() public deleteChart = new EventEmitter<Chart>();
+
   constructor(public chartManager: ChartManager) {}
 
   openDialog() {
@@ -43,7 +47,7 @@ export class ChartItemComponent {
     dialogRef
       .afterClosed()
       .pipe(filter(element => element != undefined))
-      .subscribe(result => this.deleteChart(result));
+      .subscribe(result => this.deleteChart.emit(result));
   }
 
   openUpdateDialog(): void {
@@ -56,18 +60,6 @@ export class ChartItemComponent {
     dialogRef
       .afterClosed()
       .pipe(filter(element => element != undefined))
-      .subscribe(result => this.updateChart(result));
-  }
-
-  changeVisibility(): void {
-    this.chartManager.switchVisibility(this.chart.id);
-  }
-
-  updateChart(chart: Chart): void {
-    this.chartManager.updateChart(this.chart.id, chart);
-  }
-
-  deleteChart(chart: Chart): void {
-    this.chartManager.deleteChart(chart.id);
+      .subscribe(result => this.updateChart.emit(result));
   }
 }

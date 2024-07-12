@@ -33,4 +33,16 @@ export class ChartListComponent {
   createChart(chart: Chart) {
     this.chartManager.createChart(chart);
   }
+
+  changeVisibility(chart: Chart): void {
+    this.chartManager.switchVisibility(chart.id);
+  }
+
+  updateChart(chart: Chart): void {
+    this.chartManager.updateChart(chart.id, chart);
+  }
+
+  deleteChart(chart: Chart): void {
+    this.chartManager.deleteChart(chart.id);
+  }
 }

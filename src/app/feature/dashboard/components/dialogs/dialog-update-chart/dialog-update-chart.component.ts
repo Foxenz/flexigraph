@@ -27,6 +27,7 @@ import { ChartManager } from '../../../../../shared/managers/chart.manager';
   styleUrl: './dialog-update-chart.component.scss',
 })
 export class DialogUpdateChartComponent {
+  id: string = this.initialData.chart.id;
   title: string = this.initialData.chart.title;
   type: string = this.initialData.chart.type;
   data: Data[] = this.initialData.chart.data;
@@ -45,6 +46,7 @@ export class DialogUpdateChartComponent {
 
   updateChart() {
     this.dialogRef.close({
+      id: this.id,
       title: this.title,
       type: this.type,
       data: this.data,

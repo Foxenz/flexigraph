@@ -1,6 +1,10 @@
 <div>
   @for (chart of charts; track chart.id) {
-    <app-chart-item [chart]="chart"></app-chart-item>
+    <app-chart-item
+      [chart]="chart"
+      (changeVisibility)="changeVisibility($event)"
+      (updateChart)="updateChart($event)"
+      (deleteChart)="deleteChart($event)"></app-chart-item>
   } @empty {
     <p>Aucun graphique existant</p>
   }
