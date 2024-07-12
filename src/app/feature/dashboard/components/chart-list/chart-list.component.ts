@@ -19,7 +19,7 @@ export class ChartListComponent {
   readonly dialog = inject(MatDialog);
   charts: Chart[] = ChartManager.charts;
 
-  constructor() {}
+  constructor(public chartManager: ChartManager) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogCreateChartComponent);
@@ -31,6 +31,6 @@ export class ChartListComponent {
   }
 
   createChart(chart: Chart) {
-    ChartManager.createChart(chart);
+    this.chartManager.createChart(chart);
   }
 }

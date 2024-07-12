@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Chart, Data } from '../../feature/dashboard/models/chart-model';
+import { ToasterService } from '../services/toaster.service';
 
 @Injectable()
 export class ChartManager {
@@ -48,9 +49,9 @@ export class ChartManager {
     'Circulaire',
   ];
 
-  constructor() {}
+  constructor(private toasterService: ToasterService) {}
 
-  static createChart(chart: Chart): void {
+  public createChart(chart: Chart): void {
     // Crée un id unique
     chart.id = crypto.randomUUID().substring(0, 8);
 
@@ -59,9 +60,12 @@ export class ChartManager {
 
     // Ajouter le chart à la liste
     ChartManager.charts.push(chart);
+
+    // Toast de succès en appelant le service
+    this.toasterService.successMessage('Graphique créé avec succès');
   }
 
-  static switchVisibility(id: string): void {
+  public switchVisibility(id: string): void {
     // Trouver le chart à modifier
     const chart: Chart | undefined = ChartManager.charts.find(
       chart => chart.id === id
@@ -73,21 +77,31 @@ export class ChartManager {
     }
   }
 
-  static updateChart(id: string, chart: Chart) {
+  public updateChart(id: string, chart: Chart) {
     // Trouver l'index du chart à modifier
-    const index: number = this.charts.findIndex(chart => chart.id === id);
+    const index: number = ChartManager.charts.findIndex(
+      chart => chart.id === id
+    );
 
     // Modifier le chart
     ChartManager.charts[index].title = chart.title;
     ChartManager.charts[index].type = chart.type;
     ChartManager.charts[index].data = chart.data;
+
+    // Toast de succès
+    this.toasterService.successMessage('Graphique modifié avec succès');
   }
 
-  static deleteChart(id: string): void {
+  public deleteChart(id: string): void {
     // Trouver l'index du chart à supprimer
-    const index: number = this.charts.findIndex(chart => chart.id === id);
+    const index: number = ChartManager.charts.findIndex(
+      chart => chart.id === id
+    );
 
     // Supprimer le chart de la liste
     ChartManager.charts.splice(index, 1);
+
+    // Toast de succès
+    this.toasterService.successMessage('Graphique supprimé avec succès');
   }
 }

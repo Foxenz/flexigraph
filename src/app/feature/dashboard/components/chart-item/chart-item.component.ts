@@ -11,13 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteChartComponent } from '../dialogs/dialog-delete-chart/dialog-delete-chart.component';
 import { filter } from 'rxjs';
 import { ChartManager } from '../../../../shared/managers/chart.manager';
-import { DialogCreateChartComponent } from '../dialogs/dialog-create-chart/dialog-create-chart.component';
 import { DialogUpdateChartComponent } from '../dialogs/dialog-update-chart/dialog-update-chart.component';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-chart-item',
@@ -36,11 +30,8 @@ import {
 export class ChartItemComponent {
   @Input() chart!: Chart;
   readonly dialog = inject(MatDialog);
-  // @ts-ignore
-  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(public chartManager: ChartManager) {}
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogDeleteChartComponent, {
@@ -69,26 +60,14 @@ export class ChartItemComponent {
   }
 
   changeVisibility(): void {
-    ChartManager.switchVisibility(this.chart.id);
+    this.chartManager.switchVisibility(this.chart.id);
   }
 
   updateChart(chart: Chart): void {
-    ChartManager.updateChart(this.chart.id, chart);
-
-    this._snackBar.open('Graphique modifié avec succès', 'Fermer', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration: 2000,
-    });
+    this.chartManager.updateChart(this.chart.id, chart);
   }
 
   deleteChart(chart: Chart): void {
-    ChartManager.deleteChart(chart.id);
-
-    this._snackBar.open('Graphique supprimé avec succès', 'Fermer', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration: 2000,
-    });
+    this.chartManager.deleteChart(chart.id);
   }
 }
