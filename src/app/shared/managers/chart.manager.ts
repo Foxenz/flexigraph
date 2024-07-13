@@ -38,8 +38,8 @@ export class ChartManager {
       id: '0420b652',
       title: 'Chart 3',
       type: 'Circulaire',
-      data: [ChartManager.listOfData[0], ChartManager.listOfData[2]],
-      visible: true,
+      data: [ChartManager.listOfData[0]],
+      visible: false,
     },
   ];
 

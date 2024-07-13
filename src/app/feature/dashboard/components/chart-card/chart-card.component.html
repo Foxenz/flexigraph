@@ -3,14 +3,16 @@
   cdkDragBoundary=".zone-draggable"
   cdkDrag
   [cdkDragFreeDragPosition]="dragPosition">
-  <div style="display: flex; flex-direction: column">
-    <p>{{ chart.title }}</p>
-    <p>{{ chart.id }}</p>
-    <p>{{ chart.type }}</p>
-    @for (data of chart.data; track data.label) {
-      <p>{{ data.label }}: {{ data.valuePerMonth }}</p>
-    }
-  </div>
+  <h1 style="text-align: center">{{ chart.title }}</h1>
+  @if (chart.type === 'Linéaire') {
+    <app-line-chart [chartId]="chart.id" [chartData]="chartData" />
+  }
+  @if (chart.type === 'Batônnet') {
+    <app-bar-chart [chartId]="chart.id" [chartData]="chartData" />
+  }
+  @if (chart.type === 'Circulaire') {
+    <app-doughnut-chart [chartId]="chart.id" [chartData]="chartData" />
+  }
 
   <div class="handle" cdkDragHandle>
     <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
