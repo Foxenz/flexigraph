@@ -88,6 +88,8 @@ export class ChartManager {
     ChartManager.charts[index].type = chart.type;
     ChartManager.charts[index].data = chart.data;
 
+    this.refreshChart(id);
+
     // Toast de succès
     this.toasterService.successMessage('Graphique modifié avec succès');
   }
@@ -103,5 +105,10 @@ export class ChartManager {
 
     // Toast de succès
     this.toasterService.successMessage('Graphique supprimé avec succès');
+  }
+
+  private refreshChart(id: string): void {
+    this.switchVisibility(id);
+    setTimeout(() => this.switchVisibility(id), 1);
   }
 }

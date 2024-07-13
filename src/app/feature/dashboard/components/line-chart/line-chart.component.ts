@@ -17,7 +17,7 @@ export class LineChartComponent implements OnInit {
     // Patienter 3 secondes
     setTimeout(() => {
       this.createChart(this.chartId, this.chartData);
-    }, 1000);
+    }, 1);
   }
 
   createChart(chartId: string, chartData: ChartData) {

@@ -16,7 +16,7 @@ export class BarChartComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.createChart(this.chartId, this.chartData);
-    }, 1000);
+    }, 1);
   }
 
   createChart(chartId: string, chartData: ChartData) {
