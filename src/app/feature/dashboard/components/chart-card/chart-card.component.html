@@ -4,15 +4,11 @@
   cdkDrag
   [cdkDragFreeDragPosition]="dragPosition">
   <h1 style="text-align: center">{{ chart.title }}</h1>
-  @if (chart.type === 'Linéaire') {
-    <app-line-chart [chartId]="chart.id" [chartData]="chartData" />
-  }
-  @if (chart.type === 'Batônnet') {
-    <app-bar-chart [chartId]="chart.id" [chartData]="chartData" />
-  }
-  @if (chart.type === 'Circulaire') {
-    <app-doughnut-chart [chartId]="chart.id" [chartData]="chartData" />
-  }
+
+  <app-chart
+    [chartId]="chart.id"
+    [chartData]="chartData"
+    [chartType]="chart.type" />
 
   <div class="handle" cdkDragHandle>
     <svg width="24px" fill="currentColor" viewBox="0 0 24 24">

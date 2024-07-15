@@ -2,16 +2,17 @@ import { Component, Input, OnInit } from '@angular/core';
 import Chart, { ChartData } from 'chart.js/auto';
 
 @Component({
-  selector: 'app-bar-chart',
+  selector: 'app-chart',
   standalone: true,
   imports: [],
-  templateUrl: './bar-chart.component.html',
-  styleUrl: './bar-chart.component.scss',
+  templateUrl: './chart.component.html',
+  styleUrl: './chart.component.scss',
 })
-export class BarChartComponent implements OnInit {
+export class ChartComponent implements OnInit {
   public chart!: unknown;
   @Input() chartId!: string;
   @Input() chartData!: ChartData;
+  @Input() chartType!: string;
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -19,7 +20,7 @@ export class BarChartComponent implements OnInit {
     }, 1);
   }
 
-  createChart(chartId: string, chartData: ChartData) {
+  createChart(chartId: string, chartData: ChartData): void {
     this.chart = new Chart(this.chartId, {
       type: 'bar',
       data: {

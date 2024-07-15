@@ -9,8 +9,9 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { Chart, Data } from '../../../models/chart-model';
+import { ChartModel, Data } from '../../../models/chart-model';
 import { ChartManager } from '../../../../../shared/managers/chart.manager';
+import { ChartService } from '../../../../../shared/services/chart.service';
 
 @Component({
   selector: 'app-chart-creator',
@@ -32,13 +33,21 @@ export class DialogUpdateChartComponent {
   type: string = this.initialData.chart.type;
   data: Data[] = this.initialData.chart.data;
 
-  listOfData: Data[] = ChartManager.listOfData;
-  listOfTypesChart: string[] = ChartManager.listOfTypesChart;
+  listOfData!: Data[];
+  listOfTypesChart!: string[];
 
   constructor(
+    public chartService: ChartService,
     public dialogRef: MatDialogRef<DialogUpdateChartComponent>,
-    @Inject(MAT_DIALOG_DATA) public initialData: { chart: Chart }
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public initialData: { chart: ChartModel }
+  ) {
+    this.chartService
+      .getListOfData()
+      .subscribe(data => (this.listOfData = data));
+    this.chartService
+      .getListOfTypesChart()
+      .subscribe(types => (this.listOfTypesChart = types));
+  }
 
   onNoClick() {
     this.dialogRef.close();

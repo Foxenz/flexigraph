@@ -16,7 +16,7 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Données</mat-label>
-    <mat-select [(ngModel)]="data" multiple>
+    <mat-select [(ngModel)]="selectedData" multiple>
       @for (oneData of listOfData; track oneData.label) {
         <mat-option [value]="oneData">
           {{ oneData.label }}
@@ -31,7 +31,7 @@
       mat-raised-button
       (click)="createChart()"
       color="primary"
-      [disabled]="!title || !type || !data.length">
+      [disabled]="!title || !type || !selectedData.length">
       Créer
     </button>
   </mat-dialog-actions>

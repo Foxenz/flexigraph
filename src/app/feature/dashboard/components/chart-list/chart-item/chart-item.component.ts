@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Chart } from '../../models/chart-model';
+import { ChartModel } from '../../../models/chart-model';
 import {
   MatCard,
   MatCardActions,
@@ -8,10 +8,10 @@ import {
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogDeleteChartComponent } from '../dialogs/dialog-delete-chart/dialog-delete-chart.component';
+import { DialogDeleteChartComponent } from '../../dialogs/dialog-delete-chart/dialog-delete-chart.component';
 import { filter } from 'rxjs';
-import { ChartManager } from '../../../../shared/managers/chart.manager';
-import { DialogUpdateChartComponent } from '../dialogs/dialog-update-chart/dialog-update-chart.component';
+import { ChartManager } from '../../../../../shared/managers/chart.manager';
+import { DialogUpdateChartComponent } from '../../dialogs/dialog-update-chart/dialog-update-chart.component';
 
 @Component({
   selector: 'app-chart-item',
@@ -28,14 +28,12 @@ import { DialogUpdateChartComponent } from '../dialogs/dialog-update-chart/dialo
   styleUrl: './chart-item.component.scss',
 })
 export class ChartItemComponent {
-  @Input() chart!: Chart;
+  @Input() chart!: ChartModel;
   readonly dialog = inject(MatDialog);
 
-  @Output() public changeVisibility = new EventEmitter<Chart>();
-  @Output() public updateChart = new EventEmitter<Chart>();
-  @Output() public deleteChart = new EventEmitter<Chart>();
-
-  constructor(public chartManager: ChartManager) {}
+  @Output() public changeVisibility = new EventEmitter<ChartModel>();
+  @Output() public updateChart = new EventEmitter<ChartModel>();
+  @Output() public deleteChart = new EventEmitter<ChartModel>();
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogDeleteChartComponent, {

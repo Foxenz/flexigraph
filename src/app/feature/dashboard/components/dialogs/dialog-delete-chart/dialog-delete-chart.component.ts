@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Chart } from '../../../models/chart-model';
+import { ChartModel } from '../../../models/chart-model';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -26,7 +26,7 @@ import { MatButton } from '@angular/material/button';
 export class DialogDeleteChartComponent {
   constructor(
     public dialogRef: MatDialogRef<DialogDeleteChartComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { chart: Chart }
+    @Inject(MAT_DIALOG_DATA) public data: { chart: ChartModel }
   ) {}
 
   onNoClick() {

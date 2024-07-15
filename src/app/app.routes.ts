@@ -10,7 +10,6 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    providers: [ChartManager],
     loadComponent: () =>
       import('./feature/dashboard/dashboard.component').then(
         m => m.DashboardComponent

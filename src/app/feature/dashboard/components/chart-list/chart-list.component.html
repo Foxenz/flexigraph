@@ -1,5 +1,5 @@
 <div>
-  @for (chart of charts; track chart.id) {
+  @for (chart of chartManager.charts; track chart.id) {
     <app-chart-item
       [chart]="chart"
       (changeVisibility)="changeVisibility($event)"

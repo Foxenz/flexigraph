@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { ChartItemComponent } from '../chart-item/chart-item.component';
-import { Chart } from '../../models/chart-model';
+import { ChartItemComponent } from './chart-item/chart-item.component';
+import { ChartModel } from '../../models/chart-model';
 import { MatFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { filter } from 'rxjs';
@@ -17,7 +17,6 @@ import { ChartManager } from '../../../../shared/managers/chart.manager';
 })
 export class ChartListComponent {
   readonly dialog = inject(MatDialog);
-  charts: Chart[] = ChartManager.charts;
 
   constructor(public chartManager: ChartManager) {}
 
@@ -30,19 +29,19 @@ export class ChartListComponent {
       .subscribe(result => this.createChart(result));
   }
 
-  createChart(chart: Chart) {
+  createChart(chart: ChartModel) {
     this.chartManager.createChart(chart);
   }
 
-  changeVisibility(chart: Chart): void {
+  changeVisibility(chart: ChartModel): void {
     this.chartManager.switchVisibility(chart.id);
   }
 
-  updateChart(chart: Chart): void {
+  updateChart(chart: ChartModel): void {
     this.chartManager.updateChart(chart.id, chart);
   }
 
-  deleteChart(chart: Chart): void {
+  deleteChart(chart: ChartModel): void {
     this.chartManager.deleteChart(chart.id);
   }
 }

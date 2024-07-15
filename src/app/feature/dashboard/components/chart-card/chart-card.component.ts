@@ -1,26 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
-import { Chart } from '../../models/chart-model';
-import { BarChartComponent } from '../bar-chart/bar-chart.component';
+import { ChartModel } from '../../models/chart-model';
 import { ChartData } from 'chart.js/auto';
-import { LineChartComponent } from '../line-chart/line-chart.component';
-import { DoughnutComponent } from '../pie-chart/doughnut.component';
+import { ChartComponent } from './chart/chart.component';
 
 @Component({
   selector: 'app-chart-card',
   standalone: true,
-  imports: [
-    CdkDrag,
-    CdkDragHandle,
-    BarChartComponent,
-    LineChartComponent,
-    DoughnutComponent,
-  ],
+  imports: [CdkDrag, CdkDragHandle, ChartComponent],
   templateUrl: './chart-card.component.html',
   styleUrl: './chart-card.component.scss',
 })
 export class ChartCardComponent implements OnInit {
-  @Input() chart!: Chart;
+  @Input() chart!: ChartModel;
 
   chartData: ChartData = {
     labels: [
@@ -40,7 +32,7 @@ export class ChartCardComponent implements OnInit {
     datasets: [],
   };
   chartColors: string[] = ['red', 'blue', 'green', 'yellow', 'purple'];
-  pieChartColors: string[] = [
+  doughnutChartColors: string[] = [
     'red',
     'blue',
     'green',
@@ -59,12 +51,12 @@ export class ChartCardComponent implements OnInit {
         label: data.label,
         data: data.valuePerMonth,
         backgroundColor:
-          this.chart.type === 'Circulaire'
-            ? this.pieChartColors
+          this.chart.type === 'doughnut'
+            ? this.doughnutChartColors
             : this.chartColors[index],
         borderColor:
-          this.chart.type === 'Circulaire'
-            ? this.pieChartColors
+          this.chart.type === 'doughnut'
+            ? this.doughnutChartColors
             : this.chartColors[index],
       });
     });

@@ -1,65 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Chart, Data } from '../../feature/dashboard/models/chart-model';
+import { ChartModel, Data } from '../../feature/dashboard/models/chart-model';
 import { ToasterService } from '../services/toaster.service';
+import { ChartService } from '../services/chart.service';
 
 @Injectable()
 export class ChartManager {
-  static readonly listOfData: Data[] = [
-    {
-      label: "Chiffre d'affaire",
-      valuePerMonth: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    },
-    {
-      label: 'Nombre de clients',
-      valuePerMonth: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-    },
-    {
-      label: 'Nombre de commandes',
-      valuePerMonth: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
-    },
-  ];
+  public listOfData!: Data[];
+  public charts!: ChartModel[];
+  public listOfTypesChart!: string[];
 
-  static readonly charts: Chart[] = [
-    {
-      id: '0270b747',
-      title: 'Chart 1',
-      type: 'Linéaire',
-      data: [ChartManager.listOfData[0], ChartManager.listOfData[1]],
-      visible: true,
-    },
-    {
-      id: '0220b743',
-      title: 'Chart 2',
-      type: 'Batônnet',
-      data: [ChartManager.listOfData[1], ChartManager.listOfData[2]],
-      visible: false,
-    },
-    {
-      id: '0420b652',
-      title: 'Chart 3',
-      type: 'Circulaire',
-      data: [ChartManager.listOfData[0]],
-      visible: false,
-    },
-  ];
+  constructor(
+    private chartService: ChartService,
+    private toasterService: ToasterService
+  ) {
+    this.chartService
+      .getListOfData()
+      .subscribe(data => (this.listOfData = data));
+    this.chartService.getCharts().subscribe(charts => (this.charts = charts));
+    this.chartService
+      .getListOfTypesChart()
+      .subscribe(types => (this.listOfTypesChart = types));
+  }
 
-  static readonly listOfTypesChart: string[] = [
-    'Linéaire',
-    'Batônnet',
-    'Circulaire',
-  ];
-
-  constructor(private toasterService: ToasterService) {}
-
-  public createChart(chart: Chart): void {
+  public createChart(chart: ChartModel): void {
     // Crée un id unique
-    chart.id = crypto.randomUUID().substring(0, 8);
+    chart.id = crypto.randomUUID();
 
     // Le mettre visible par défaut
     chart.visible = true;
 
     // Ajouter le chart à la liste
-    ChartManager.charts.push(chart);
+    this.charts.push(chart);
 
     // Toast de succès en appelant le service
     this.toasterService.successMessage('Graphique créé avec succès');
@@ -67,7 +38,7 @@ export class ChartManager {
 
   public switchVisibility(id: string): void {
     // Trouver le chart à modifier
-    const chart: Chart | undefined = ChartManager.charts.find(
+    const chart: ChartModel | undefined = this.charts.find(
       chart => chart.id === id
     );
 
@@ -77,16 +48,14 @@ export class ChartManager {
     }
   }
 
-  public updateChart(id: string, chart: Chart) {
+  public updateChart(id: string, chart: ChartModel) {
     // Trouver l'index du chart à modifier
-    const index: number = ChartManager.charts.findIndex(
-      chart => chart.id === id
-    );
+    const index: number = this.charts.findIndex(chart => chart.id === id);
 
     // Modifier le chart
-    ChartManager.charts[index].title = chart.title;
-    ChartManager.charts[index].type = chart.type;
-    ChartManager.charts[index].data = chart.data;
+    this.charts[index].title = chart.title;
+    this.charts[index].type = chart.type;
+    this.charts[index].data = chart.data;
 
     this.refreshChart(id);
 
@@ -96,12 +65,10 @@ export class ChartManager {
 
   public deleteChart(id: string): void {
     // Trouver l'index du chart à supprimer
-    const index: number = ChartManager.charts.findIndex(
-      chart => chart.id === id
-    );
+    const index: number = this.charts.findIndex(chart => chart.id === id);
 
     // Supprimer le chart de la liste
-    ChartManager.charts.splice(index, 1);
+    this.charts.splice(index, 1);
 
     // Toast de succès
     this.toasterService.successMessage('Graphique supprimé avec succès');

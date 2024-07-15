@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ChartCardComponent } from '../chart-card/chart-card.component';
-import { Chart } from '../../models/chart-model';
+import { ChartModel } from '../../models/chart-model';
 import { ChartManager } from '../../../../shared/managers/chart.manager';
 
 @Component({
@@ -11,5 +11,5 @@ import { ChartManager } from '../../../../shared/managers/chart.manager';
   styleUrl: './chart-zone.component.scss',
 })
 export class ChartZoneComponent {
-  charts: Chart[] = ChartManager.charts;
+  constructor(public chartManager: ChartManager) {}
 }

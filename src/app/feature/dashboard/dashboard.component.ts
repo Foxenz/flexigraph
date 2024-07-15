@@ -8,6 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { ChartZoneComponent } from './components/chart-zone/chart-zone.component';
 import { DialogCreateChartComponent } from './components/dialogs/dialog-create-chart/dialog-create-chart.component';
 import { ChartListComponent } from './components/chart-list/chart-list.component';
+import { ChartManager } from '../../shared/managers/chart.manager';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +25,7 @@ import { ChartListComponent } from './components/chart-list/chart-list.component
     DialogCreateChartComponent,
     ChartListComponent,
   ],
+  providers: [ChartManager],
 })
 export class DashboardComponent implements OnDestroy {
   mobileQuery: MediaQueryList;

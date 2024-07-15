@@ -10,6 +10,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { Data } from '../../../models/chart-model';
 import { ChartManager } from '../../../../../shared/managers/chart.manager';
+import { ChartService } from '../../../../../shared/services/chart.service';
 
 @Component({
   selector: 'app-chart-creator',
@@ -28,12 +29,21 @@ import { ChartManager } from '../../../../../shared/managers/chart.manager';
 export class DialogCreateChartComponent {
   title: string = '';
   type: string = '';
-  data: Data[] = [];
+  selectedData: Data[] = [];
+  listOfData!: Data[];
+  listOfTypesChart!: string[];
 
-  listOfData: Data[] = ChartManager.listOfData;
-  listOfTypesChart: string[] = ChartManager.listOfTypesChart;
-
-  constructor(public dialogRef: MatDialogRef<DialogCreateChartComponent>) {}
+  constructor(
+    public chartService: ChartService,
+    public dialogRef: MatDialogRef<DialogCreateChartComponent>
+  ) {
+    this.chartService
+      .getListOfData()
+      .subscribe(data => (this.listOfData = data));
+    this.chartService
+      .getListOfTypesChart()
+      .subscribe(types => (this.listOfTypesChart = types));
+  }
 
   onNoClick() {
     this.dialogRef.close();
@@ -43,7 +53,7 @@ export class DialogCreateChartComponent {
     this.dialogRef.close({
       title: this.title,
       type: this.type,
-      data: this.data,
+      data: this.selectedData,
     });
   }
 }
