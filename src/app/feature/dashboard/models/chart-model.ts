@@ -1,7 +1,9 @@
+import { ChartType } from 'chart.js/auto';
+
 export interface ChartModel {
   id: string;
   title: string;
-  type: string;
+  type: ChartType;
   data: Data[];
   visible: boolean;
 }
