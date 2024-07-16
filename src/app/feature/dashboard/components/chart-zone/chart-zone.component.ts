@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ChartCardComponent } from '../chart-card/chart-card.component';
-import { ChartModel } from '../../models/chart-model';
 import { ChartManager } from '../../../../shared/managers/chart.manager';
 
 @Component({

@@ -10,7 +10,6 @@ import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteChartComponent } from '../../dialogs/dialog-delete-chart/dialog-delete-chart.component';
 import { filter } from 'rxjs';
-import { ChartManager } from '../../../../../shared/managers/chart.manager';
 import { DialogUpdateChartComponent } from '../../dialogs/dialog-update-chart/dialog-update-chart.component';
 
 @Component({

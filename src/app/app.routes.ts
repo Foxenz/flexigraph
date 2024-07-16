@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { ChartManager } from './shared/managers/chart.manager';
 
 export const routes: Routes = [
   {

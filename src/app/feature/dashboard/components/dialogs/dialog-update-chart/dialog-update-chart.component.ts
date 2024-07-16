@@ -10,7 +10,6 @@ import {
 } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { ChartModel, Data } from '../../../models/chart-model';
-import { ChartManager } from '../../../../../shared/managers/chart.manager';
 import { ChartService } from '../../../../../shared/services/chart.service';
 
 @Component({
