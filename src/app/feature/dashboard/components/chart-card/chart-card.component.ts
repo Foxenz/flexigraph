@@ -3,11 +3,12 @@ import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { ChartModel } from '../../models/chart-model';
 import { ChartData } from 'chart.js/auto';
 import { ChartComponent } from './chart/chart.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-chart-card',
   standalone: true,
-  imports: [CdkDrag, CdkDragHandle, ChartComponent],
+  imports: [CdkDrag, CdkDragHandle, ChartComponent, NgClass],
   templateUrl: './chart-card.component.html',
   styleUrl: './chart-card.component.scss',
 })
