@@ -29,6 +29,9 @@ export class ChartManager {
     // Le mettre visible par défaut
     chart.visible = true;
 
+    // Mettre le zIndex au dessus de tous les autres charts
+    chart.zIndex = Math.max(...this.charts.map(chart => chart.zIndex)) + 1;
+
     // Ajouter le chart à la liste
     this.charts.push(chart);
 
@@ -77,5 +80,13 @@ export class ChartManager {
   private refreshChart(id: string): void {
     this.switchVisibility(id);
     setTimeout(() => this.switchVisibility(id), 1);
+  }
+
+  public frontUp(chart: ChartModel): void {
+    const maxZIndex: number = Math.max(
+      ...this.charts.map(chart => chart.zIndex)
+    );
+
+    chart.zIndex = maxZIndex + 1;
   }
 }

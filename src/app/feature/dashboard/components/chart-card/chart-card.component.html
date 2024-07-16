@@ -1,8 +1,10 @@
 <div
   class="box"
   [ngClass]="chart.type"
+  [ngStyle]="{ 'z-index': chart.zIndex }"
   cdkDragBoundary=".zone-draggable"
   cdkDrag
+  (mousedown)="chartManager.frontUp(chart)"
   [cdkDragFreeDragPosition]="dragPosition">
   <h1 style="text-align: center">{{ chart.title }}</h1>
 

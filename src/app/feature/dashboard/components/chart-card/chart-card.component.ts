@@ -3,12 +3,13 @@ import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { ChartModel } from '../../models/chart-model';
 import { ChartData } from 'chart.js/auto';
 import { ChartComponent } from './chart/chart.component';
-import { NgClass } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
+import { ChartManager } from '../../../../shared/managers/chart.manager';
 
 @Component({
   selector: 'app-chart-card',
   standalone: true,
-  imports: [CdkDrag, CdkDragHandle, ChartComponent, NgClass],
+  imports: [CdkDrag, CdkDragHandle, ChartComponent, NgClass, NgStyle],
   templateUrl: './chart-card.component.html',
   styleUrl: './chart-card.component.scss',
 })
@@ -45,6 +46,8 @@ export class ChartCardComponent implements OnInit {
     'grey',
     'cyan',
   ];
+
+  constructor(public chartManager: ChartManager) {}
 
   ngOnInit(): void {
     this.chart.data.forEach((data, index) => {

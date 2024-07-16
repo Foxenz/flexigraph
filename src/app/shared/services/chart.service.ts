@@ -171,6 +171,7 @@ export class ChartService {
       type: 'bar',
       data: [this.listOfData[25], this.listOfData[26]],
       visible: true,
+      zIndex: 0,
     },
     {
       id: '0220b743',
@@ -178,6 +179,7 @@ export class ChartService {
       type: 'line',
       data: [this.listOfData[0]],
       visible: false,
+      zIndex: 0,
     },
     {
       id: '0420b652',
@@ -185,6 +187,7 @@ export class ChartService {
       type: 'doughnut',
       data: [this.listOfData[27]],
       visible: false,
+      zIndex: 0,
     },
   ];
 
