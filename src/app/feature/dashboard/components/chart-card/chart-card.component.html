@@ -5,7 +5,10 @@
   cdkDragBoundary=".zone-draggable"
   cdkDrag
   (mousedown)="chartManager.frontUp(chart)"
-  [cdkDragFreeDragPosition]="dragPosition">
+  (cdkDragEnded)="
+    chartManager.updatePosition(chart.id, $event.source.getFreeDragPosition())
+  "
+  [cdkDragFreeDragPosition]="{ x: chart.position.x, y: chart.position.y }">
   <h1 style="text-align: center">{{ chart.title }}</h1>
 
   <app-chart

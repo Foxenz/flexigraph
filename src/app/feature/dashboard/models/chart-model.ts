@@ -7,6 +7,7 @@ export interface ChartModel {
   data: Data[];
   visible: boolean;
   zIndex: number;
+  position: { x: number; y: number };
 }
 
 export interface Data {

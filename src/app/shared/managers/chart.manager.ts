@@ -32,6 +32,9 @@ export class ChartManager {
     // Mettre le zIndex au dessus de tous les autres charts
     chart.zIndex = Math.max(...this.charts.map(chart => chart.zIndex)) + 1;
 
+    // Mettre la position par défaut
+    chart.position = { x: 0, y: 0 };
+
     // Ajouter le chart à la liste
     this.charts.push(chart);
 
@@ -47,6 +50,7 @@ export class ChartManager {
 
     // Inverser la visibilité
     if (chart) {
+      this.frontUp(chart);
       chart.visible = !chart.visible;
     }
   }
@@ -88,5 +92,17 @@ export class ChartManager {
     );
 
     chart.zIndex = maxZIndex + 1;
+  }
+
+  public updatePosition(id: string, position: { x: number; y: number }): void {
+    // Trouver le chart à modifier
+    const chart: ChartModel | undefined = this.charts.find(
+      chart => chart.id === id
+    );
+
+    // Modifier la position
+    if (chart) {
+      chart.position = position;
+    }
   }
 }

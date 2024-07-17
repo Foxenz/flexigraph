@@ -65,6 +65,4 @@ export class ChartCardComponent implements OnInit {
       });
     });
   }
-
-  dragPosition = { x: 0, y: 0 };
 }

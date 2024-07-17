@@ -172,6 +172,7 @@ export class ChartService {
       data: [this.listOfData[25], this.listOfData[26]],
       visible: true,
       zIndex: 0,
+      position: { x: 0, y: 0 },
     },
     {
       id: '0220b743',
@@ -180,6 +181,7 @@ export class ChartService {
       data: [this.listOfData[0]],
       visible: false,
       zIndex: 0,
+      position: { x: 0, y: 0 },
     },
     {
       id: '0420b652',
@@ -188,6 +190,7 @@ export class ChartService {
       data: [this.listOfData[27]],
       visible: false,
       zIndex: 0,
+      position: { x: 0, y: 0 },
     },
   ];
 
