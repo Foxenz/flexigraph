@@ -1,11 +1,6 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
   <!-- ToolBar -->
-  <mat-toolbar color="primary" class="toolbar">
-    <button mat-icon-button (click)="side.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <h1 class="app-name">FlexiGraph</h1>
-  </mat-toolbar>
+  <app-navbar (toggleSidenav)="side.toggle()" />
 
   <mat-sidenav-container
     class="sidenav-container"

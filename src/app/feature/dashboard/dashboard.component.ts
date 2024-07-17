@@ -9,6 +9,8 @@ import { ChartZoneComponent } from './components/chart-zone/chart-zone.component
 import { DialogCreateChartComponent } from './components/dialogs/dialog-create-chart/dialog-create-chart.component';
 import { ChartListComponent } from './components/chart-list/chart-list.component';
 import { ChartManager } from '../../shared/managers/chart.manager';
+import { RouterLink } from '@angular/router';
+import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +26,8 @@ import { ChartManager } from '../../shared/managers/chart.manager';
     ChartZoneComponent,
     DialogCreateChartComponent,
     ChartListComponent,
+    RouterLink,
+    NavbarComponent,
   ],
   providers: [ChartManager],
 })

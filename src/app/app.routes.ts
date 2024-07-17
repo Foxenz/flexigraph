@@ -15,6 +15,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'data-management',
+    loadComponent: () =>
+      import('./feature/data-management/data-management.component').then(
+        m => m.DataManagementComponent
+      ),
+  },
+  {
     path: 'not-found',
     loadComponent: () =>
       import('./shared/components/not-found/not-found.component').then(
