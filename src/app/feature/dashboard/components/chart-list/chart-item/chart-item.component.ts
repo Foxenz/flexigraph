@@ -10,7 +10,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteChartComponent } from '../../dialogs/dialog-delete-chart/dialog-delete-chart.component';
 import { filter } from 'rxjs';
-import { DialogUpdateChartComponent } from '../../dialogs/dialog-update-chart/dialog-update-chart.component';
+import { DialogFormChartComponent } from '../../dialogs/dialog-chart/dialog-form-chart.component';
 
 @Component({
   selector: 'app-chart-item',
@@ -48,7 +48,7 @@ export class ChartItemComponent {
   }
 
   openUpdateDialog(): void {
-    const dialogRef = this.dialog.open(DialogUpdateChartComponent, {
+    const dialogRef = this.dialog.open(DialogFormChartComponent, {
       data: {
         chart: this.chart,
       },

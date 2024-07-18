@@ -1,20 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { Data, ListOfData } from '../../../models/chart-model';
+import { ChartModel, ListOfData, Data } from '../../../models/chart-model';
 import { ChartService } from '../../../../../shared/services/chart.service';
 import { MatIcon } from '@angular/material/icon';
 import { NgForOf } from '@angular/common';
 
 @Component({
-  selector: 'app-chart-creator',
+  selector: 'app-chart-dialog',
   standalone: true,
   imports: [
     MatInputModule,
@@ -27,19 +28,24 @@ import { NgForOf } from '@angular/common';
     MatIcon,
     NgForOf,
   ],
-  templateUrl: './dialog-create-chart.component.html',
-  styleUrl: './dialog-create-chart.component.scss',
+  templateUrl: './dialog-form-chart.component.html',
+  styleUrls: ['./dialog-form-chart.component.scss'],
 })
-export class DialogCreateChartComponent {
+export class DialogFormChartComponent implements OnInit {
+  id: string = '';
   title: string = '';
   type: string = '';
-  selectedEntries: { year: number; data: Data[]; availableData: Data[] }[] = [];
+  selectedEntries: { year: number; data?: Data; availableData: Data[] }[] = [];
+
   listOfData!: ListOfData[];
   listOfTypesChart!: string[];
 
+  isUpdate: boolean = false;
+
   constructor(
     public chartService: ChartService,
-    public dialogRef: MatDialogRef<DialogCreateChartComponent>
+    public dialogRef: MatDialogRef<DialogFormChartComponent>,
+    @Inject(MAT_DIALOG_DATA) public initialData: { chart?: ChartModel }
   ) {
     this.chartService
       .getListOfData()
@@ -49,25 +55,49 @@ export class DialogCreateChartComponent {
       .subscribe(types => (this.listOfTypesChart = types));
   }
 
+  ngOnInit() {
+    if (this.initialData?.chart) {
+      this.isUpdate = true;
+      this.id = this.initialData.chart.id;
+      this.title = this.initialData.chart.title;
+      this.type = this.initialData.chart.type;
+      this.selectedEntries = this.initialData.chart.data.map(chartData => ({
+        year: chartData.year,
+        data: chartData.data,
+        availableData: this.getAvailableData(chartData.year),
+      }));
+    }
+  }
+
+  getAvailableData(year: number): Data[] {
+    const yearData = this.listOfData.find(data => data.year === year);
+    return yearData ? yearData.data : [];
+  }
+
   onNoClick() {
     this.dialogRef.close();
   }
 
-  createChart() {
+  submitChart() {
     const formattedData = this.selectedEntries.map(entry => ({
       year: entry.year,
       data: entry.data,
     }));
 
-    this.dialogRef.close({
-      title: this.title,
-      type: this.type,
-      data: formattedData,
-    });
-  }
-
-  addEntry() {
-    this.selectedEntries.push({ year: 0, data: [], availableData: [] });
+    if (this.isUpdate) {
+      this.dialogRef.close({
+        id: this.id,
+        title: this.title,
+        type: this.type,
+        data: formattedData,
+      });
+    } else {
+      this.dialogRef.close({
+        title: this.title,
+        type: this.type,
+        data: formattedData,
+      });
+    }
   }
 
   updateDataOptions(index: number) {
@@ -78,6 +108,10 @@ export class DialogCreateChartComponent {
     this.selectedEntries[index].availableData = selectedYearData
       ? selectedYearData.data
       : [];
+  }
+
+  addEntry() {
+    this.selectedEntries.push({ year: 0, data: undefined, availableData: [] });
   }
 
   removeEntry(index: number) {

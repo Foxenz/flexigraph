@@ -86,7 +86,7 @@ export class ChartService {
       title: "Chiffre d'affaire",
       type: 'line',
       data: [
-        { year: this.listOfData[0].year, data: this.listOfData[0].data[1] },
+        { year: this.listOfData[0].year, data: this.listOfData[0].data[0] },
       ],
       visible: false,
       zIndex: 0,
@@ -94,10 +94,11 @@ export class ChartService {
     },
     {
       id: '0420b652',
-      title: 'Visites du site web',
+      title: 'Data seulement',
       type: 'doughnut',
       data: [
-        { year: this.listOfData[0].year, data: this.listOfData[0].data[1] },
+        { year: this.listOfData[1].year, data: this.listOfData[1].data[3] },
+        { year: this.listOfData[0].year, data: this.listOfData[0].data[3] },
       ],
       visible: false,
       zIndex: 0,

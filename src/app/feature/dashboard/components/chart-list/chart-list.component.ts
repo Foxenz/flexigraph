@@ -4,9 +4,9 @@ import { ChartModel } from '../../models/chart-model';
 import { MatFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { filter } from 'rxjs';
-import { DialogCreateChartComponent } from '../dialogs/dialog-create-chart/dialog-create-chart.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ChartManager } from '../../../../shared/managers/chart.manager';
+import { DialogFormChartComponent } from '../dialogs/dialog-chart/dialog-form-chart.component';
 
 @Component({
   selector: 'app-chart-list',
@@ -21,7 +21,7 @@ export class ChartListComponent {
   constructor(public chartManager: ChartManager) {}
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogCreateChartComponent);
+    const dialogRef = this.dialog.open(DialogFormChartComponent);
 
     dialogRef
       .afterClosed()
