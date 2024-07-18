@@ -58,7 +58,7 @@
       mat-raised-button
       (click)="submitChart()"
       color="primary"
-      [disabled]="!title || !type || selectedEntries.length === 0">
+      [disabled]="!isFormValid()">
       {{ isUpdate ? 'Modifier' : 'Créer' }}
     </button>
   </mat-dialog-actions>

@@ -117,4 +117,13 @@ export class DialogFormChartComponent implements OnInit {
   removeEntry(index: number) {
     this.selectedEntries.splice(index, 1);
   }
+
+  isFormValid(): boolean {
+    if (!this.title || !this.type) {
+      return false;
+    }
+    return this.selectedEntries.every(
+      entry => entry.year !== 0 && !!entry.data
+    );
+  }
 }
