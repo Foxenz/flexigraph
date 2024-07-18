@@ -38,7 +38,7 @@ export class ChartListComponent {
   }
 
   updateChart(chart: ChartModel): void {
-    this.chartManager.updateChart(chart.id, chart);
+    this.chartManager.updateChart(chart);
   }
 
   deleteChart(chart: ChartModel): void {

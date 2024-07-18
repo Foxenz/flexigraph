@@ -58,17 +58,19 @@ export class ChartManager {
     }
   }
 
-  public updateChart(id: string, chart: ChartModel) {
+  public updateChart(chart: ChartModel) {
     // Trouver l'index du chart à modifier
-    const index: number = this.charts.findIndex(chart => chart.id === id);
+    const index: number = this.charts.findIndex(
+      searchChart => searchChart.id === chart.id
+    );
 
     // Modifier le chart
     this.charts[index].title = chart.title;
     this.charts[index].type = chart.type;
     this.charts[index].data = chart.data;
 
-    if (chart.visible) {
-      this.refreshChart(id);
+    if (this.charts[index].visible) {
+      this.refreshChart(chart.id);
     }
 
     // Toast de succès
