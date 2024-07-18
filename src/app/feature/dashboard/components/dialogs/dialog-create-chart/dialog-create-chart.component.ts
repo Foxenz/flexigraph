@@ -8,7 +8,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { Data, YearData } from '../../../models/chart-model';
+import { Data, ListOfData } from '../../../models/chart-model';
 import { ChartService } from '../../../../../shared/services/chart.service';
 import { MatIcon } from '@angular/material/icon';
 import { NgForOf } from '@angular/common';
@@ -34,7 +34,7 @@ export class DialogCreateChartComponent {
   title: string = '';
   type: string = '';
   selectedEntries: { year: number; data: Data[]; availableData: Data[] }[] = [];
-  listOfData!: YearData[];
+  listOfData!: ListOfData[];
   listOfTypesChart!: string[];
 
   constructor(
@@ -58,6 +58,7 @@ export class DialogCreateChartComponent {
       year: entry.year,
       data: entry.data,
     }));
+
     this.dialogRef.close({
       title: this.title,
       type: this.type,

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   ChartModel,
-  Data,
-  YearData,
+  ListOfData,
 } from '../../feature/dashboard/models/chart-model';
 import { Observable, of } from 'rxjs';
 
@@ -10,7 +9,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class ChartService {
-  private readonly listOfData: YearData[] = [
+  private readonly listOfData: ListOfData[] = [
     {
       year: 2022,
       data: [
@@ -75,8 +74,8 @@ export class ChartService {
       title: 'Taux de conversion Physique vs Online',
       type: 'bar',
       data: [
-        { year: this.listOfData[0].year, data: [this.listOfData[0].data[1]] },
-        { year: this.listOfData[1].year, data: [this.listOfData[1].data[1]] },
+        { year: this.listOfData[0].year, data: this.listOfData[0].data[1] },
+        { year: this.listOfData[1].year, data: this.listOfData[1].data[1] },
       ],
       visible: true,
       zIndex: 0,
@@ -87,7 +86,7 @@ export class ChartService {
       title: "Chiffre d'affaire",
       type: 'line',
       data: [
-        { year: this.listOfData[0].year, data: [this.listOfData[0].data[1]] },
+        { year: this.listOfData[0].year, data: this.listOfData[0].data[1] },
       ],
       visible: false,
       zIndex: 0,
@@ -98,7 +97,7 @@ export class ChartService {
       title: 'Visites du site web',
       type: 'doughnut',
       data: [
-        { year: this.listOfData[0].year, data: [this.listOfData[0].data[1]] },
+        { year: this.listOfData[0].year, data: this.listOfData[0].data[1] },
       ],
       visible: false,
       zIndex: 0,
@@ -110,7 +109,7 @@ export class ChartService {
 
   constructor() {}
 
-  public getListOfData(): Observable<YearData[]> {
+  public getListOfData(): Observable<ListOfData[]> {
     return of(this.listOfData);
   }
 

@@ -52,8 +52,8 @@ export class ChartCardComponent implements OnInit {
   ngOnInit(): void {
     this.chart.data.forEach((data, index) => {
       this.chartData.datasets.push({
-        label: data.data[0].label + ' (' + data.year + ')',
-        data: data.data[0].valuePerMonth,
+        label: data.data.label + ' (' + data.year + ')',
+        data: data.data.valuePerMonth,
         backgroundColor:
           this.chart.type === 'doughnut'
             ? this.doughnutChartColors

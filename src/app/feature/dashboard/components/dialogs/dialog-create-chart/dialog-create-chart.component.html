@@ -27,9 +27,10 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
       <mat-form-field appearance="outline">
         <mat-label>Données</mat-label>
-        <mat-select [(ngModel)]="entry.data" multiple>
+        <mat-select [(ngModel)]="entry.data">
           <mat-option *ngFor="let data of entry.availableData" [value]="data">
             {{ data.label }}
           </mat-option>
@@ -48,6 +49,7 @@
     [disabled]="selectedEntries.length >= 4">
     Ajouter une data
   </button>
+
   <mat-dialog-actions align="end">
     <button mat-raised-button (click)="onNoClick()">Annuler</button>
     <button

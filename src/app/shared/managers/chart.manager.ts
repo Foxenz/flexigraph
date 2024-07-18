@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import {
   ChartModel,
-  Data,
-  YearData,
+  ListOfData,
 } from '../../feature/dashboard/models/chart-model';
 import { ToasterService } from '../services/toaster.service';
 import { ChartService } from '../services/chart.service';
 
 @Injectable()
 export class ChartManager {
-  public listOfData!: YearData[];
+  public listOfData!: ListOfData[];
   public charts!: ChartModel[];
   public listOfTypesChart!: string[];
 
