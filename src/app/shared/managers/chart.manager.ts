@@ -67,7 +67,9 @@ export class ChartManager {
     this.charts[index].type = chart.type;
     this.charts[index].data = chart.data;
 
-    this.refreshChart(id);
+    if (chart.visible) {
+      this.refreshChart(id);
+    }
 
     // Toast de succès
     this.toasterService.successMessage('Graphique modifié avec succès');
