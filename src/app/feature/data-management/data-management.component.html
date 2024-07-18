@@ -1,12 +1,49 @@
-<app-navbar />
+<app-navbar></app-navbar>
 
-@for (data of chartManager.listOfData; track data) {
-  <div style="border: 1px solid black; margin-top: 50px">
-    <h1>{{ data.year }}</h1>
+<div style="padding: 50px">
+  <mat-form-field appearance="outline">
+    <mat-label>Select Year</mat-label>
+    <mat-select
+      [(value)]="selectedYear"
+      (selectionChange)="onYearChange($event.value)">
+      <mat-option *ngFor="let year of availableYears" [value]="year">
+        {{ year }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    @for (data2 of data.data; track data2) {
-      <h2>{{ data2.label }}</h2>
-      <h3>{{ data2.valuePerMonth }}</h3>
-    }
-  </div>
-}
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Label Column -->
+    <ng-container matColumnDef="label">
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let element">{{ element.label }}</td>
+    </ng-container>
+
+    <!-- Data Column -->
+    <ng-container matColumnDef="data">
+      <th mat-header-cell *matHeaderCellDef>Data</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.valuePerMonth | json }}
+      </td>
+    </ng-container>
+
+    <!-- Star Column -->
+    <ng-container matColumnDef="star" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon>more_vert</mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <button
+    style="margin-top: 25px"
+    mat-raised-button
+    color="primary"
+    (click)="createData()">
+    Créer une nouvelle donnée
+  </button>
+</div>
