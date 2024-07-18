@@ -1,1 +1,12 @@
 <app-navbar />
+
+@for (data of chartManager.listOfData; track data) {
+  <div style="border: 1px solid black; margin-top: 50px">
+    <h1>{{ data.year }}</h1>
+
+    @for (data2 of data.data; track data2) {
+      <h2>{{ data2.label }}</h2>
+      <h3>{{ data2.valuePerMonth }}</h3>
+    }
+  </div>
+}
