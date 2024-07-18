@@ -119,7 +119,7 @@ export class DialogFormChartComponent implements OnInit {
   }
 
   isFormValid(): boolean {
-    if (!this.title || !this.type) {
+    if (!this.title || !this.type || !this.selectedEntries.length) {
       return false;
     }
     return this.selectedEntries.every(
