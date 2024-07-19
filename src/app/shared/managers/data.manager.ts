@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToasterService } from '../services/toaster.service';
 import { DataService } from '../services/data.service';
-import { ListOfData } from '../models/data-model';
+import { Data, ListOfData } from '../models/data-model';
 
 @Injectable()
 export class DataManager {
@@ -24,11 +24,32 @@ export class DataManager {
     return this.listOfData.find(data => data.year === year);
   }
 
-  public createData() {
+  public createData(data: Data, selectedYear: number) {
+    data.id = crypto.randomUUID();
+
+    const dataForYear = this.getDataForYear(selectedYear);
+
+    if (!dataForYear) {
+      return;
+    }
+
+    dataForYear.data.push(data);
+
     this.toasterService.successMessage('Data créée avec succès');
   }
 
-  public editData() {
+  public editData(data: Data, selectedYear: number) {
+    const dataForYear = this.getDataForYear(selectedYear);
+
+    if (!dataForYear) {
+      return;
+    }
+
+    const index = dataForYear.data.findIndex(
+      dataInYearSelected => dataInYearSelected.id === data.id
+    );
+    dataForYear.data[index] = data;
+
     this.toasterService.successMessage('Data modifiée avec succès');
   }
 

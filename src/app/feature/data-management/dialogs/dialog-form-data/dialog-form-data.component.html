@@ -1,5 +1,19 @@
 <div class="chart-form">
   <h2 mat-dialog-title>
-    {{ isUpdate ? 'Modifier votre graphique' : 'Créer un nouveau graphique' }}
+    {{ isUpdate ? 'Modifier votre data' : 'Créer une nouvelle data' }}
   </h2>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Nom de la data</mat-label>
+    <input matInput [(ngModel)]="label" />
+  </mat-form-field>
+
+  <p>{{ valuePerMonth }}</p>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button (click)="onNoClick()">Annuler</button>
+    <button mat-raised-button (click)="submitData()" color="primary">
+      {{ isUpdate ? 'Modifier' : 'Créer' }}
+    </button>
+  </mat-dialog-actions>
 </div>

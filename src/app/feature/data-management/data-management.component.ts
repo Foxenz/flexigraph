@@ -92,11 +92,13 @@ export class DataManagementComponent {
   }
 
   createData(data: Data) {
-    this.dataManager.createData();
+    this.dataManager.createData(data, this.selectedYear);
+    this.table.renderRows();
   }
 
   editData(data: Data) {
-    this.dataManager.editData();
+    this.dataManager.editData(data, this.selectedYear);
+    this.table.renderRows();
   }
 
   deleteData(element: Data) {
