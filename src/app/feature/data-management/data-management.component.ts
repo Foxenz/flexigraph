@@ -127,6 +127,4 @@ export class DataManagementComponent {
       .pipe(filter(element => element != undefined))
       .subscribe(result => this.editData(result));
   }
-
-  protected readonly elements = elements;
 }

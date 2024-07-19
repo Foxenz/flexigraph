@@ -34,7 +34,21 @@ import { MatButton } from '@angular/material/button';
 })
 export class DialogFormDataComponent implements OnInit {
   label: string = '';
-  valuePerMonth: number[] = [];
+  valuePerMonth: number[] = Array(12).fill(0);
+  monthNames: string[] = [
+    'Janvier',
+    'Février',
+    'Mars',
+    'Avril',
+    'Mai',
+    'Juin',
+    'Juillet',
+    'Août',
+    'Septembre',
+    'Octobre',
+    'Novembre',
+    'Décembre',
+  ];
 
   isUpdate: boolean = false;
 

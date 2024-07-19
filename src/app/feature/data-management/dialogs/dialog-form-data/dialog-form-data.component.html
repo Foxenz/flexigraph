@@ -8,7 +8,14 @@
     <input matInput [(ngModel)]="label" />
   </mat-form-field>
 
-  <p>{{ valuePerMonth }}</p>
+  <div class="grid-container">
+    <div *ngFor="let value of valuePerMonth; let i = index" class="grid-item">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ monthNames[i] }}</mat-label>
+        <input matInput type="number" [(ngModel)]="valuePerMonth[i]" />
+      </mat-form-field>
+    </div>
+  </div>
 
   <mat-dialog-actions align="end">
     <button mat-raised-button (click)="onNoClick()">Annuler</button>
