@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  ChartModel,
-  ListOfData,
-} from '../../feature/dashboard/models/chart-model';
+import { ChartModel } from '../../feature/dashboard/models/chart-model';
 import { ToasterService } from '../services/toaster.service';
 import { ChartService } from '../services/chart.service';
+import { DataService } from '../services/data.service';
+import { ListOfData } from '../models/data-model';
 
 @Injectable()
 export class ChartManager {
@@ -14,9 +13,10 @@ export class ChartManager {
 
   constructor(
     private chartService: ChartService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private dataService: DataService
   ) {
-    this.chartService
+    this.dataService
       .getListOfData()
       .subscribe(data => (this.listOfData = data));
     this.chartService.getCharts().subscribe(charts => (this.charts = charts));

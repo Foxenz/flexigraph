@@ -9,10 +9,12 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { ChartModel, ListOfData, Data } from '../../../models/chart-model';
+import { ChartModel } from '../../../models/chart-model';
 import { ChartService } from '../../../../../shared/services/chart.service';
 import { MatIcon } from '@angular/material/icon';
 import { NgForOf } from '@angular/common';
+import { DataService } from '../../../../../shared/services/data.service';
+import { Data, ListOfData } from '../../../../../shared/models/data-model';
 
 @Component({
   selector: 'app-chart-dialog',
@@ -43,11 +45,12 @@ export class DialogFormChartComponent implements OnInit {
   isUpdate: boolean = false;
 
   constructor(
+    public dataService: DataService,
     public chartService: ChartService,
     public dialogRef: MatDialogRef<DialogFormChartComponent>,
     @Inject(MAT_DIALOG_DATA) public initialData: { chart?: ChartModel }
   ) {
-    this.chartService
+    this.dataService
       .getListOfData()
       .subscribe(data => (this.listOfData = data));
     this.chartService

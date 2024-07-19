@@ -1,4 +1,5 @@
 import { ChartType } from 'chart.js/auto';
+import { Data } from '../../../shared/models/data-model';
 
 export interface ChartModel {
   id: string;
@@ -14,16 +15,4 @@ export interface ChartModel {
 export interface OneChartData {
   year: number;
   data: Data;
-}
-
-// Interface pour stocker les fake données
-export interface ListOfData {
-  year: number;
-  data: Data[];
-}
-
-// Interface d'une donnée
-export interface Data {
-  label: string;
-  valuePerMonth: number[];
 }
