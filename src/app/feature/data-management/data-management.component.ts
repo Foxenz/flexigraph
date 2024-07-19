@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { ChartManager } from '../../shared/managers/chart.manager';
 import {
@@ -21,6 +21,11 @@ import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { DataManager } from '../../shared/managers/data.manager';
 import { Data, ListOfData } from '../../shared/models/data-model';
+import { DialogFormChartComponent } from '../dashboard/components/dialogs/dialog-chart/dialog-form-chart.component';
+import { filter } from 'rxjs';
+import { DialogFormDataComponent } from './dialogs/dialog-form-data/dialog-form-data.component';
+import { MatDialog } from '@angular/material/dialog';
+import { elements } from 'chart.js';
 
 @Component({
   selector: 'app-data-management',
@@ -60,6 +65,7 @@ export class DataManagementComponent {
   availableYears: number[] = [];
   selectedYear: number;
   @ViewChild(MatTable) table!: MatTable<Data>;
+  readonly dialog = inject(MatDialog);
 
   constructor(public dataManager: DataManager) {
     this.initializeAvailableYears();
@@ -85,11 +91,11 @@ export class DataManagementComponent {
     this.initializeDataSource();
   }
 
-  createData() {
+  createData(data: Data) {
     this.dataManager.createData();
   }
 
-  editData() {
+  editData(data: Data) {
     this.dataManager.editData();
   }
 
@@ -97,4 +103,28 @@ export class DataManagementComponent {
     this.dataManager.deleteData(element.id, this.selectedYear);
     this.table.renderRows();
   }
+
+  openCreateFormDialog() {
+    const dialogRef = this.dialog.open(DialogFormDataComponent);
+
+    dialogRef
+      .afterClosed()
+      .pipe(filter(element => element != undefined))
+      .subscribe(result => this.createData(result));
+  }
+
+  openUpdateFormDialog(element: Data): void {
+    const dialogRef = this.dialog.open(DialogFormDataComponent, {
+      data: {
+        data: element,
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(filter(element => element != undefined))
+      .subscribe(result => this.editData(result));
+  }
+
+  protected readonly elements = elements;
 }

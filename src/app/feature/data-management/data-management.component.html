@@ -38,7 +38,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="editData()">
+          <button mat-menu-item (click)="openUpdateFormDialog(element)">
             <mat-icon>edit</mat-icon>
             <span>Modifier</span>
           </button>
@@ -58,7 +58,7 @@
     style="margin-top: 25px"
     mat-raised-button
     color="primary"
-    (click)="createData()">
+    (click)="openCreateFormDialog()">
     Créer une nouvelle donnée
   </button>
 </div>
