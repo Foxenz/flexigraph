@@ -26,7 +26,7 @@ export class ChartService {
     dataService.getListOfData().subscribe(data => (this.listOfData = data));
 
     // A supprimer à la fin
-    this.charts.push({
+    this.charts.push({ 
       id: '0270b747',
       title: 'Taux de conversion Physique vs Online',
       type: this.listOfTypesChart[0],
@@ -34,11 +34,10 @@ export class ChartService {
         { year: 2022, data: this.listOfData[0].data[1] },
         { year: 2023, data: this.listOfData[1].data[1] },
       ],
-      visible: true,
       zIndex: 0,
       position: { x: 0, y: 0 },
-    });
-
+    }),
+     
     this.charts.push({
       id: '0220b743',
       title: "Chiffre d'affaire",
@@ -49,12 +48,10 @@ export class ChartService {
       visible: false,
       zIndex: 0,
       position: { x: 0, y: 0 },
-    });
+    }),
 
-    this.charts.push({
       id: '0420b652',
-      title: 'Data seulement',
-      type: this.listOfTypesChart[2],
+      type: { name: 'Donut', value: 'doughnut' },
       data: [
         { year: this.listOfData[1].year, data: this.listOfData[1].data[3] },
         { year: this.listOfData[0].year, data: this.listOfData[0].data[3] },
@@ -73,3 +70,4 @@ export class ChartService {
     return of(this.listOfTypesChart);
   }
 }
+ 

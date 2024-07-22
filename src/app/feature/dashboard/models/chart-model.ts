@@ -11,6 +11,11 @@ export interface ChartModel {
   position: { x: number; y: number };
 }
 
+export interface TypeOfChart {
+  name: string;
+  value: ChartType;
+}
+
 // Interface pour stocker les données d'un seul chart
 export interface OneChartData {
   year: number;

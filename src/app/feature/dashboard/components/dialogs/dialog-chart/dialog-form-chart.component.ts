@@ -63,7 +63,7 @@ export class DialogFormChartComponent implements OnInit {
       this.isUpdate = true;
       this.id = this.initialData.chart.id;
       this.title = this.initialData.chart.title;
-      this.type = this.initialData.chart.type;
+      this.type = this.initialData.chart.type.value;
       this.selectedEntries = this.initialData.chart.data.map(chartData => ({
         year: chartData.year,
         data: chartData.data,
