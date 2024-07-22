@@ -10,7 +10,14 @@ import { ListOfData } from '../models/data-model';
 export class ChartService {
   public listOfData!: ListOfData[];
   private readonly charts: ChartModel[] = [];
-  private readonly listOfTypesChart: string[] = ['bar', 'line', 'doughnut'];
+  private readonly listOfTypesChart: string[] = [
+    'line',
+    'bar',
+    'radar',
+    'doughnut',
+    'pie',
+    'polarArea',
+  ];
 
   constructor(dataService: DataService) {
     dataService.getListOfData().subscribe(data => (this.listOfData = data));

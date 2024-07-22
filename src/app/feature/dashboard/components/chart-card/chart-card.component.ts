@@ -34,7 +34,7 @@ export class ChartCardComponent implements OnInit {
     datasets: [],
   };
   chartColors: string[] = ['red', 'blue', 'green', 'yellow', 'purple'];
-  doughnutChartColors: string[] = [
+  biggestChartColors: string[] = [
     'red',
     'blue',
     'green',
@@ -46,6 +46,7 @@ export class ChartCardComponent implements OnInit {
     'grey',
     'cyan',
   ];
+  biggestChart: string[] = ['doughnut', 'pie', 'polarArea', 'radar'];
 
   constructor(public chartManager: ChartManager) {}
 
@@ -54,15 +55,17 @@ export class ChartCardComponent implements OnInit {
       this.chartData.datasets.push({
         label: data.data.label + ' (' + data.year + ')',
         data: data.data.valuePerMonth,
-        backgroundColor:
-          this.chart.type === 'doughnut'
-            ? this.doughnutChartColors
-            : this.chartColors[index],
-        borderColor:
-          this.chart.type === 'doughnut'
-            ? this.doughnutChartColors
-            : this.chartColors[index],
+        backgroundColor: this.biggestChart.includes(this.chart.type)
+          ? this.biggestChartColors
+          : this.chartColors[index],
+        borderColor: this.biggestChart.includes(this.chart.type)
+          ? this.biggestChartColors
+          : this.chartColors[index],
       });
     });
+  }
+
+  test() {
+    console.log(this.chartManager.charts);
   }
 }
