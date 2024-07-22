@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="toolbar" (click)="emitToggleSidenav()">
-  @if (isDashboardPage) {
+  @if (window.location.pathname === '/dashboard') {
     <button mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>

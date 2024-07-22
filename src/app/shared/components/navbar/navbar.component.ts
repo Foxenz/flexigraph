@@ -13,7 +13,7 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class NavbarComponent {
   @Output() public toggleSidenav = new EventEmitter<void>();
-  isDashboardPage: boolean = window.location.pathname === '/dashboard';
+  protected readonly window = window;
 
   emitToggleSidenav() {
     this.toggleSidenav.emit();
