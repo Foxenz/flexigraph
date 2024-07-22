@@ -35,7 +35,9 @@ export class DialogFormChartComponent implements OnInit {
   id: string = '';
   title: string = '';
   type: string = '';
-  selectedEntries: { year: number; data?: Data; availableData: Data[] }[] = [];
+  selectedEntries: { year?: number; data?: Data; availableData: Data[] }[] = [
+    { year: undefined, data: undefined, availableData: [] }, // On affiche un champ vide par défaut
+  ];
 
   listOfData!: ListOfData[];
   listOfTypesChart!: string[];

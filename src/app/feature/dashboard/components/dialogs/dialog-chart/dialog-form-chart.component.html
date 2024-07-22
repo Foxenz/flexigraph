@@ -44,9 +44,11 @@
           }
         </mat-select>
       </mat-form-field>
-      <button mat-icon-button (click)="removeEntry(i)">
-        <mat-icon>delete</mat-icon>
-      </button>
+      @if (selectedEntries.length > 1) {
+        <button mat-icon-button (click)="removeEntry(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      }
     </div>
   }
 
