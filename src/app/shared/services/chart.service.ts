@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ChartModel } from '../../feature/dashboard/models/chart-model';
+import {
+  ChartModel,
+  TypeOfChart,
+} from '../../feature/dashboard/models/chart-model';
 import { Observable, of } from 'rxjs';
 import { DataService } from './data.service';
 import { ListOfData } from '../models/data-model';
@@ -10,7 +13,14 @@ import { ListOfData } from '../models/data-model';
 export class ChartService {
   public listOfData!: ListOfData[];
   private readonly charts: ChartModel[] = [];
-  private readonly listOfTypesChart: string[] = ['bar', 'line', 'doughnut'];
+  private readonly listOfTypesChart: TypeOfChart[] = [
+    { name: 'Bâtonnet', value: 'bar' },
+    { name: 'Linéaire', value: 'line' },
+    { name: 'Donut', value: 'doughnut' },
+    { name: 'Camembert', value: 'pie' },
+    { name: 'Radar', value: 'radar' },
+    { name: 'Polaire', value: 'polarArea' },
+  ];
 
   constructor(dataService: DataService) {
     dataService.getListOfData().subscribe(data => (this.listOfData = data));
@@ -19,7 +29,7 @@ export class ChartService {
     this.charts.push({
       id: '0270b747',
       title: 'Taux de conversion Physique vs Online',
-      type: 'bar',
+      type: { name: 'Bâtonnet', value: 'bar' },
       data: [
         { year: 2022, data: this.listOfData[0].data[1] },
         { year: 2023, data: this.listOfData[1].data[1] },
@@ -32,7 +42,7 @@ export class ChartService {
     this.charts.push({
       id: '0220b743',
       title: "Chiffre d'affaire",
-      type: 'line',
+      type: { name: 'Linéaire', value: 'line' },
       data: [
         { year: this.listOfData[0].year, data: this.listOfData[0].data[0] },
       ],
@@ -44,7 +54,7 @@ export class ChartService {
     this.charts.push({
       id: '0420b652',
       title: 'Data seulement',
-      type: 'doughnut',
+      type: { name: 'Donut', value: 'doughnut' },
       data: [
         { year: this.listOfData[1].year, data: this.listOfData[1].data[3] },
         { year: this.listOfData[0].year, data: this.listOfData[0].data[3] },
@@ -59,7 +69,7 @@ export class ChartService {
     return of(this.charts);
   }
 
-  public getListOfTypesChart(): Observable<string[]> {
+  public getListOfTypesChart(): Observable<TypeOfChart[]> {
     return of(this.listOfTypesChart);
   }
 }

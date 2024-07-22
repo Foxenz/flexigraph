@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ChartModel } from '../../feature/dashboard/models/chart-model';
+import {
+  ChartModel,
+  TypeOfChart,
+} from '../../feature/dashboard/models/chart-model';
 import { ToasterService } from '../services/toaster.service';
 import { ChartService } from '../services/chart.service';
 import { DataService } from '../services/data.service';
@@ -9,7 +12,7 @@ import { ListOfData } from '../models/data-model';
 export class ChartManager {
   public listOfData!: ListOfData[];
   public charts!: ChartModel[];
-  public listOfTypesChart!: string[];
+  public listOfTypesChart!: TypeOfChart[];
 
   constructor(
     private chartService: ChartService,

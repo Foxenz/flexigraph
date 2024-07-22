@@ -12,8 +12,8 @@
     <mat-label>Type de graphique</mat-label>
     <mat-select [(ngModel)]="type">
       @for (type of listOfTypesChart; track type) {
-        <mat-option [value]="type">
-          {{ type }}
+        <mat-option [value]="type.value">
+          {{ type.name }}
         </mat-option>
       }
     </mat-select>
