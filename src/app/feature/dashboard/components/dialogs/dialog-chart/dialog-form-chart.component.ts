@@ -12,7 +12,6 @@ import { FormsModule } from '@angular/forms';
 import { ChartModel } from '../../../models/chart-model';
 import { ChartService } from '../../../../../shared/services/chart.service';
 import { MatIcon } from '@angular/material/icon';
-import { NgForOf } from '@angular/common';
 import { DataService } from '../../../../../shared/services/data.service';
 import { Data, ListOfData } from '../../../../../shared/models/data-model';
 
@@ -28,7 +27,6 @@ import { Data, ListOfData } from '../../../../../shared/models/data-model';
     MatDialogTitle,
     MatIconButton,
     MatIcon,
-    NgForOf,
   ],
   templateUrl: './dialog-form-chart.component.html',
   styleUrls: ['./dialog-form-chart.component.scss'],

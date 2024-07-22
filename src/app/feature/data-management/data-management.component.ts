@@ -13,19 +13,17 @@ import {
   MatRowDef,
   MatTable,
 } from '@angular/material/table';
-import { JsonPipe, NgForOf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatFormField, MatLabel, MatSelect } from '@angular/material/select';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { DataManager } from '../../shared/managers/data.manager';
-import { Data, ListOfData } from '../../shared/models/data-model';
-import { DialogFormChartComponent } from '../dashboard/components/dialogs/dialog-chart/dialog-form-chart.component';
+import { Data } from '../../shared/models/data-model';
 import { filter } from 'rxjs';
 import { DialogFormDataComponent } from './dialogs/dialog-form-data/dialog-form-data.component';
 import { MatDialog } from '@angular/material/dialog';
-import { elements } from 'chart.js';
 
 @Component({
   selector: 'app-data-management',
@@ -42,7 +40,6 @@ import { elements } from 'chart.js';
     MatRowDef,
     MatHeaderRowDef,
     MatRow,
-    NgForOf,
     MatOption,
     MatSelect,
     MatLabel,

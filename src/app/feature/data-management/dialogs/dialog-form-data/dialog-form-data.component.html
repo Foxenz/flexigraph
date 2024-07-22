@@ -9,15 +9,17 @@
   </mat-form-field>
 
   <div class="grid-container">
-    <div *ngFor="let value of valuePerMonth; let i = index" class="grid-item">
-      <mat-form-field appearance="outline">
-        <mat-label>{{ monthNames[i] }}</mat-label>
-        <input
-          matInput
-          type="number"
-          [formControl]="form.controls.valuePerMonth.at(i)" />
-      </mat-form-field>
-    </div>
+    @for (value of valuePerMonth; track value; let i = $index) {
+      <div class="grid-item">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ monthNames[i] }}</mat-label>
+          <input
+            matInput
+            type="number"
+            [formControl]="form.controls.valuePerMonth.at(i)" />
+        </mat-form-field>
+      </div>
+    }
   </div>
 
   <mat-dialog-actions align="end">

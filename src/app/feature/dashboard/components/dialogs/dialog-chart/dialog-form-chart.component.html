@@ -11,38 +11,44 @@
   <mat-form-field appearance="outline">
     <mat-label>Type de graphique</mat-label>
     <mat-select [(ngModel)]="type">
-      <mat-option *ngFor="let type of listOfTypesChart" [value]="type">
-        {{ type }}
-      </mat-option>
+      @for (type of listOfTypesChart; track type) {
+        <mat-option [value]="type">
+          {{ type }}
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 
-  <div
-    *ngFor="let entry of selectedEntries; let i = index"
-    class="entry-container">
-    <mat-form-field appearance="outline">
-      <mat-label>Année</mat-label>
-      <mat-select
-        [(ngModel)]="entry.year"
-        (selectionChange)="updateDataOptions(i)">
-        <mat-option *ngFor="let data of listOfData" [value]="data.year">
-          {{ data.year }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+  @for (entry of selectedEntries; track entry; let i = $index) {
+    <div class="entry-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Année</mat-label>
+        <mat-select
+          [(ngModel)]="entry.year"
+          (selectionChange)="updateDataOptions(i)">
+          @for (data of listOfData; track data) {
+            <mat-option [value]="data.year">
+              {{ data.year }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Données</mat-label>
-      <mat-select [(ngModel)]="entry.data">
-        <mat-option *ngFor="let data of entry.availableData" [value]="data">
-          {{ data.label }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button mat-icon-button (click)="removeEntry(i)">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Données</mat-label>
+        <mat-select [(ngModel)]="entry.data">
+          @for (data of entry.availableData; track data) {
+            <mat-option [value]="data">
+              {{ data.label }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button (click)="removeEntry(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  }
 
   <button
     mat-raised-button
