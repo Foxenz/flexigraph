@@ -9,7 +9,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { ChartModel } from '../../../models/chart-model';
+import { ChartModel, TypeOfChart } from '../../../models/chart-model';
 import { ChartService } from '../../../../../shared/services/chart.service';
 import { MatIcon } from '@angular/material/icon';
 import { DataService } from '../../../../../shared/services/data.service';
@@ -34,13 +34,13 @@ import { Data, ListOfData } from '../../../../../shared/models/data-model';
 export class DialogFormChartComponent implements OnInit {
   id: string = '';
   title: string = '';
-  type: string = '';
+  type!: TypeOfChart;
   selectedEntries: { year?: number; data?: Data; availableData: Data[] }[] = [
     { year: undefined, data: undefined, availableData: [] }, // On affiche un champ vide par défaut
   ];
 
   listOfData!: ListOfData[];
-  listOfTypesChart!: string[];
+  listOfTypesChart!: TypeOfChart[];
 
   isUpdate: boolean = false;
 

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Chart, { ChartData, ChartType } from 'chart.js/auto';
+import { TypeOfChart } from '../../../models/chart-model';
 
 @Component({
   selector: 'app-chart',
@@ -13,7 +14,7 @@ export class ChartComponent implements OnInit {
 
   @Input() chartId!: string;
   @Input() chartData!: ChartData;
-  @Input() chartType!: ChartType;
+  @Input() chartType!: TypeOfChart;
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -24,10 +25,10 @@ export class ChartComponent implements OnInit {
   createChart(
     chartId: string,
     chartData: ChartData,
-    chartType: ChartType
+    chartType: TypeOfChart
   ): void {
     this.chart = new Chart(chartId, {
-      type: chartType,
+      type: chartType.value,
       data: {
         labels: chartData.labels,
         datasets: chartData.datasets,

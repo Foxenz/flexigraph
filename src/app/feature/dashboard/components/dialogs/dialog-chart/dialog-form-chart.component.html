@@ -13,7 +13,7 @@
     <mat-select [(ngModel)]="type">
       @for (type of listOfTypesChart; track type) {
         <mat-option [value]="type">
-          {{ type }}
+          {{ type.viewValue }}
         </mat-option>
       }
     </mat-select>

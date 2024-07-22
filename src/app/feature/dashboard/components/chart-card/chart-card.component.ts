@@ -55,10 +55,10 @@ export class ChartCardComponent implements OnInit {
       this.chartData.datasets.push({
         label: data.data.label + ' (' + data.year + ')',
         data: data.data.valuePerMonth,
-        backgroundColor: this.biggestChart.includes(this.chart.type)
+        backgroundColor: this.biggestChart.includes(this.chart.type.value)
           ? this.biggestChartColors
           : this.chartColors[index],
-        borderColor: this.biggestChart.includes(this.chart.type)
+        borderColor: this.biggestChart.includes(this.chart.type.value)
           ? this.biggestChartColors
           : this.chartColors[index],
       });

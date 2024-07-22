@@ -4,7 +4,7 @@ import { Data } from '../../../shared/models/data-model';
 export interface ChartModel {
   id: string;
   title: string;
-  type: ChartType;
+  type: TypeOfChart;
   data: OneChartData[];
   visible: boolean;
   zIndex: number;
@@ -15,4 +15,9 @@ export interface ChartModel {
 export interface OneChartData {
   year: number;
   data: Data;
+}
+
+export interface TypeOfChart {
+  value: ChartType;
+  viewValue: string;
 }
