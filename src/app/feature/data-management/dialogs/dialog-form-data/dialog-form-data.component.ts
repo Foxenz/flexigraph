@@ -6,7 +6,12 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { Data } from '../../../../shared/models/data-model';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatOption } from '@angular/material/autocomplete';
@@ -28,13 +33,21 @@ import { MatButton } from '@angular/material/button';
     NgForOf,
     MatButton,
     MatDialogActions,
+    ReactiveFormsModule,
   ],
   templateUrl: './dialog-form-data.component.html',
   styleUrl: './dialog-form-data.component.scss',
 })
 export class DialogFormDataComponent implements OnInit {
-  label: string = '';
-  valuePerMonth: number[] = Array(12).fill(null);
+  valuePerMonth: number[] = Array(12).fill(0);
+
+  form = this.fb.group({
+    label: this.fb.control('', [Validators.required]),
+    valuePerMonth: this.fb.array(
+      this.valuePerMonth.map(value => this.fb.control(value))
+    ),
+  });
+
   monthNames: string[] = [
     'Janvier',
     'Février',
@@ -53,6 +66,7 @@ export class DialogFormDataComponent implements OnInit {
   isUpdate: boolean = false;
 
   constructor(
+    private fb: FormBuilder,
     public dialogRef: MatDialogRef<DialogFormDataComponent>,
     @Inject(MAT_DIALOG_DATA) public initialData: { data?: Data }
   ) {}
@@ -60,8 +74,10 @@ export class DialogFormDataComponent implements OnInit {
   ngOnInit() {
     if (this.initialData?.data) {
       this.isUpdate = true;
-      this.label = this.initialData.data.label;
-      this.valuePerMonth = this.initialData.data.valuePerMonth;
+      this.form.patchValue({
+        label: this.initialData.data.label,
+        valuePerMonth: this.initialData.data.valuePerMonth || [],
+      });
     }
   }
 
@@ -70,10 +86,13 @@ export class DialogFormDataComponent implements OnInit {
   }
 
   submitData() {
+    const sanitizedValuePerMonth = this.form.value.valuePerMonth?.map(
+      value => value ?? 0
+    );
     const data: Data = {
       id: this.initialData?.data?.id || '',
-      label: this.label,
-      valuePerMonth: this.valuePerMonth,
+      label: this.form.controls.label.value || '',
+      valuePerMonth: sanitizedValuePerMonth || [],
     };
     this.dialogRef.close(data);
   }

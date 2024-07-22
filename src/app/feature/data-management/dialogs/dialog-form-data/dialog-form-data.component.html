@@ -5,21 +5,28 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Nom de la data</mat-label>
-    <input matInput [(ngModel)]="label" />
+    <input matInput [formControl]="form.controls.label" />
   </mat-form-field>
 
   <div class="grid-container">
     <div *ngFor="let value of valuePerMonth; let i = index" class="grid-item">
       <mat-form-field appearance="outline">
         <mat-label>{{ monthNames[i] }}</mat-label>
-        <input matInput type="number" [(ngModel)]="valuePerMonth[i]" />
+        <input
+          matInput
+          type="number"
+          [formControl]="form.controls.valuePerMonth.at(i)" />
       </mat-form-field>
     </div>
   </div>
 
   <mat-dialog-actions align="end">
     <button mat-raised-button (click)="onNoClick()">Annuler</button>
-    <button mat-raised-button (click)="submitData()" color="primary">
+    <button
+      mat-raised-button
+      [disabled]="form.invalid"
+      (click)="submitData()"
+      color="primary">
       {{ isUpdate ? 'Modifier' : 'Créer' }}
     </button>
   </mat-dialog-actions>
