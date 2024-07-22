@@ -64,8 +64,4 @@ export class ChartCardComponent implements OnInit {
       });
     });
   }
-
-  test() {
-    console.log(this.chartManager.charts);
-  }
 }
