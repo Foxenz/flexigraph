@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import Chart, { ChartData, ChartType } from 'chart.js/auto';
+import Chart, { ChartData } from 'chart.js/auto';
 import { TypeOfChart } from '../../../models/chart-model';
 
 @Component({

@@ -3,7 +3,7 @@
     {{ isUpdate ? 'Modifier votre data' : 'Créer une nouvelle data' }}
   </h2>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field style="width: 50%" appearance="outline">
     <mat-label>Nom de la data</mat-label>
     <input matInput [formControl]="form.controls.label" />
   </mat-form-field>

@@ -3,12 +3,12 @@
     {{ isUpdate ? 'Modifier votre graphique' : 'Créer un nouveau graphique' }}
   </h2>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field style="width: 100%" appearance="outline">
     <mat-label>Titre</mat-label>
     <input matInput [(ngModel)]="title" />
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
+  <mat-form-field style="width: 100%" appearance="outline">
     <mat-label>Type de graphique</mat-label>
     <mat-select [(ngModel)]="type">
       @for (type of listOfTypesChart; track type) {
@@ -21,7 +21,7 @@
 
   @for (entry of selectedEntries; track entry; let i = $index) {
     <div class="entry-container">
-      <mat-form-field appearance="outline">
+      <mat-form-field style="margin-right: 10px" appearance="outline">
         <mat-label>Année</mat-label>
         <mat-select
           [(ngModel)]="entry.year"
