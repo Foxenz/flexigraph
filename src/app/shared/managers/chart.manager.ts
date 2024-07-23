@@ -35,9 +35,12 @@ export class ChartManager {
     // Le mettre visible par défaut
     chart.visible = true;
 
-    // Mettre le zIndex au dessus de tous les autres charts
-    chart.zIndex = Math.max(...this.charts.map(chart => chart.zIndex)) + 1;
-
+    // Mettre le zIndex au dessus de tous les autres charts mais prévoir si la liste est vide
+    if (this.charts.length === 0) {
+      chart.zIndex = 1;
+    } else {
+      chart.zIndex = Math.max(...this.charts.map(chart => chart.zIndex)) + 1;
+    }
     // Mettre la position par défaut
     chart.position = { x: 0, y: 0 };
 
