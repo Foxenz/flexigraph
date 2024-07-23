@@ -6,7 +6,7 @@ import {
 import { ToasterService } from '../services/toaster.service';
 import { ChartService } from '../services/chart.service';
 import { DataService } from '../services/data.service';
-import { ListOfData } from '../models/data-model';
+import { Data, ListOfData } from '../models/data-model';
 
 @Injectable()
 export class ChartManager {
@@ -114,5 +114,35 @@ export class ChartManager {
     if (chart) {
       chart.position = position;
     }
+  }
+
+  deleteChartUsingData(data: Data) {
+    // On supprime le ou les graphiques qui utilisent ces données
+    this.charts.forEach(chart => {
+      const index: number = chart.data.findIndex(
+        oneChartData => oneChartData.data.id === data.id
+      );
+
+      if (index !== -1) {
+        // Si on trouve la data dans le chart, on supprime le chart
+        this.deleteChart(chart.id);
+        // Si on trouve la data dans le chart, on supprime la data
+        //   chart.data.splice(index, 1);
+      }
+    });
+  }
+
+  updateChartUsingData(data: Data) {
+    // On met à jour le ou les graphiques qui utilisent ces données
+    this.charts.forEach(chart => {
+      const index: number = chart.data.findIndex(
+        oneChartData => oneChartData.data.id === data.id
+      );
+
+      if (index !== -1) {
+        // Si on trouve la data dans le chart, on met à jour le chart
+        chart.data[index].data = data;
+      }
+    });
   }
 }

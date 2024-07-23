@@ -16,15 +16,11 @@ import { Data } from '../../../../shared/models/data-model';
   templateUrl: './dialog-delete-data.component.html',
   styleUrl: './dialog-delete-data.component.scss',
 })
-export class DialogDeleteDataComponent implements OnInit {
+export class DialogDeleteDataComponent {
   constructor(
     public dialogRef: MatDialogRef<DialogDeleteDataComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { dataToDelete: Data }
   ) {}
-
-  ngOnInit() {
-    console.log(this.data);
-  }
 
   onNoClick() {
     this.dialogRef.close();

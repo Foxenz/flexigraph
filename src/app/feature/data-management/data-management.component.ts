@@ -65,7 +65,10 @@ export class DataManagementComponent {
   @ViewChild(MatTable) table!: MatTable<Data>;
   readonly dialog = inject(MatDialog);
 
-  constructor(public dataManager: DataManager) {
+  constructor(
+    public dataManager: DataManager,
+    public chartManager: ChartManager
+  ) {
     this.initializeAvailableYears();
     this.selectedYear = this.availableYears[0];
     this.initializeDataSource();
@@ -95,13 +98,21 @@ export class DataManagementComponent {
   }
 
   editData(data: Data) {
+    // On met à jour la data et on rafraichit le tableau
     this.dataManager.editData(data, this.selectedYear);
     this.table.renderRows();
+
+    // On met à jour le ou les graphiques qui utilisent ces données
+    this.chartManager.updateChartUsingData(data);
   }
 
   deleteData(element: Data) {
+    // On supprime la data et on rafraichit le tableau
     this.dataManager.deleteData(element.id, this.selectedYear);
     this.table.renderRows();
+
+    // On supprime le ou les graphiques qui utilisent ces données
+    this.chartManager.deleteChartUsingData(element);
   }
 
   openCreateFormDialog() {
