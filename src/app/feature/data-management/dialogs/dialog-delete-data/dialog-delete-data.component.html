@@ -1,9 +1,13 @@
 <h2 mat-dialog-title>Suppression d'un graphique</h2>
 <mat-dialog-content
-  >Voulez-vous vraiment <strong>supprimer</strong> le graphique : "<i
-    style="font-weight: bold"
-    >{{ data.chart.title }}</i
+  >Voulez-vous vraiment supprimer la data "<i style="font-weight: bold">{{
+    data.dataToDelete.label
+  }}</i
   >" ?
+  <br />
+  <br />
+  Si la data est <strong>supprimée</strong>, les graphiques l'utilisant le
+  <strong>seront également</strong>.
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-raised-button (click)="onNoClick()">Annuler</button>

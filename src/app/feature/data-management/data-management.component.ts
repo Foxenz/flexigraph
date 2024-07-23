@@ -24,6 +24,7 @@ import { Data } from '../../shared/models/data-model';
 import { filter } from 'rxjs';
 import { DialogFormDataComponent } from './dialogs/dialog-form-data/dialog-form-data.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogDeleteDataComponent } from './dialogs/dialog-delete-data/dialog-delete-data.component';
 
 @Component({
   selector: 'app-data-management',
@@ -123,5 +124,18 @@ export class DataManagementComponent {
       .afterClosed()
       .pipe(filter(element => element != undefined))
       .subscribe(result => this.editData(result));
+  }
+
+  openDeleteDialog(element: Data) {
+    const dialogRef = this.dialog.open(DialogDeleteDataComponent, {
+      data: {
+        dataToDelete: element,
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(filter(element => element != undefined))
+      .subscribe(result => this.deleteData(result));
   }
 }
