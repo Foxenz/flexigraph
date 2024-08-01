@@ -1,6 +1,6 @@
 // Interface pour stocker les fake données
 export interface TypeOfListOfData {
-  value: typeOfData;
+  value: TypeOfData;
   viewValue: string;
   listOfData: ListOfData[];
 }
@@ -17,4 +17,4 @@ export interface Data {
   valuePerMonth: number[];
 }
 
-export type typeOfData = 'business' | 'association' | 'education';
+export type TypeOfData = 'business' | 'association' | 'education';
