@@ -18,6 +18,7 @@ export interface OneChartData {
   data: Data;
 }
 
+// Interface pour les types de chart et leur valeur à afficher
 export interface TypeOfChart {
   value: ChartType;
   viewValue: string;

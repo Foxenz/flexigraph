@@ -28,7 +28,7 @@ export class ChartService {
     // A supprimer à la fin
     this.charts.push({
       id: '0270b747',
-      title: 'Taux de conversion Physique vs Online',
+      title: 'Graphique n°1',
       type: this.listOfTypesChart[0],
       data: [
         { year: 2022, data: this.listOfData[0].data[1] },
@@ -42,7 +42,7 @@ export class ChartService {
 
     this.charts.push({
       id: '0220b743',
-      title: "Chiffre d'affaire",
+      title: 'Graphique n°2',
       type: this.listOfTypesChart[1],
       data: [
         { year: this.listOfData[0].year, data: this.listOfData[0].data[0] },
@@ -55,7 +55,7 @@ export class ChartService {
 
     this.charts.push({
       id: '0420b652',
-      title: 'Nombre de clients',
+      title: 'Graphique n°3',
       type: this.listOfTypesChart[2],
       data: [
         { year: this.listOfData[1].year, data: this.listOfData[1].data[3] },
