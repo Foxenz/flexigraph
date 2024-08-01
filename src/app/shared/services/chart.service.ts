@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  ChartModel,
+  ChartCardModel,
   TypeOfChart,
 } from '../../feature/dashboard/models/chart-model';
 import { Observable, of } from 'rxjs';
@@ -12,7 +12,7 @@ import { ListOfData } from '../models/data-model';
 })
 export class ChartService {
   public listOfData!: ListOfData[];
-  private readonly charts: ChartModel[] = [];
+  private readonly charts: ChartCardModel[] = [];
   private readonly listOfTypesChart: TypeOfChart[] = [
     { value: 'bar', viewValue: 'Bâtonnet' },
     { value: 'line', viewValue: 'Linéaire' },
@@ -37,6 +37,7 @@ export class ChartService {
       visible: true,
       zIndex: 0,
       position: { x: 0, y: 0 },
+      size: { width: 600, height: 400 },
     });
 
     this.charts.push({
@@ -49,6 +50,7 @@ export class ChartService {
       visible: false,
       zIndex: 0,
       position: { x: 0, y: 0 },
+      size: { width: 600, height: 400 },
     });
 
     this.charts.push({
@@ -62,10 +64,11 @@ export class ChartService {
       visible: false,
       zIndex: 0,
       position: { x: 0, y: 0 },
+      size: { width: 600, height: 400 },
     });
   }
 
-  public getCharts(): Observable<ChartModel[]> {
+  public getCharts(): Observable<ChartCardModel[]> {
     return of(this.charts);
   }
 

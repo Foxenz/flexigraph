@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  ChartModel,
+  ChartCardModel,
   TypeOfChart,
 } from '../../feature/dashboard/models/chart-model';
 import { ToasterService } from '../services/toaster.service';
@@ -11,7 +11,7 @@ import { Data, ListOfData } from '../models/data-model';
 @Injectable()
 export class ChartManager {
   public listOfData!: ListOfData[];
-  public charts!: ChartModel[];
+  public charts!: ChartCardModel[];
   public listOfTypesChart!: TypeOfChart[];
 
   constructor(
@@ -28,7 +28,7 @@ export class ChartManager {
       .subscribe(types => (this.listOfTypesChart = types));
   }
 
-  public createChart(chart: ChartModel): void {
+  public createChart(chart: ChartCardModel): void {
     // Crée un id unique
     chart.id = crypto.randomUUID();
 
@@ -44,6 +44,9 @@ export class ChartManager {
     // Mettre la position par défaut
     chart.position = { x: 0, y: 0 };
 
+    // Mettre la taille par défaut
+    chart.size = { width: 600, height: 400 };
+
     // Ajouter le chart à la liste
     this.charts.push(chart);
 
@@ -53,7 +56,7 @@ export class ChartManager {
 
   public switchVisibility(id: string): void {
     // Trouver le chart à modifier
-    const chart: ChartModel | undefined = this.charts.find(
+    const chart: ChartCardModel | undefined = this.charts.find(
       chart => chart.id === id
     );
 
@@ -64,7 +67,7 @@ export class ChartManager {
     }
   }
 
-  public updateChart(chart: ChartModel) {
+  public updateChart(chart: ChartCardModel) {
     // Trouver l'index du chart à modifier
     const index: number = this.charts.findIndex(
       searchChart => searchChart.id === chart.id
@@ -99,7 +102,7 @@ export class ChartManager {
     setTimeout(() => this.switchVisibility(id), 1);
   }
 
-  public frontUp(chart: ChartModel): void {
+  public frontUp(chart: ChartCardModel): void {
     const maxZIndex: number = Math.max(
       ...this.charts.map(chart => chart.zIndex)
     );
@@ -109,7 +112,7 @@ export class ChartManager {
 
   public updatePosition(id: string, position: { x: number; y: number }): void {
     // Trouver le chart à modifier
-    const chart: ChartModel | undefined = this.charts.find(
+    const chart: ChartCardModel | undefined = this.charts.find(
       chart => chart.id === id
     );
 
@@ -147,5 +150,18 @@ export class ChartManager {
         chart.data[index].data = data;
       }
     });
+  }
+
+  updateSize(id: string, offsetWidth: number, offsetHeight: number) {
+    // Trouver le chart à modifier
+    const chart: ChartCardModel | undefined = this.charts.find(
+      chart => chart.id === id
+    );
+
+    // Modifier la taille
+    if (chart) {
+      // 42 = padding + border
+      chart.size = { width: offsetWidth - 42, height: offsetHeight - 42 };
+    }
   }
 }

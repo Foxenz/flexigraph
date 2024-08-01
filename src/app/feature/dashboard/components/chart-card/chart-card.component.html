@@ -1,7 +1,11 @@
 <div
   #resizeBox
   class="box"
-  [ngStyle]="{ 'z-index': chart.zIndex }"
+  [ngStyle]="{
+    'z-index': chart.zIndex,
+    'width.px': chart.size.width,
+    'height.px': chart.size.height,
+  }"
   cdkDragBoundary=".zone-draggable"
   cdkDrag
   (mousedown)="chartManager.frontUp(chart)"
@@ -29,6 +33,13 @@
     [cdkDragLockAxis]="lockAxis"
     class="dragCorner"
     cdkDrag
-    (cdkDragMoved)="dragMove(dragHandleCorner)">
+    (cdkDragMoved)="dragMove(dragHandleCorner)"
+    (cdkDragEnded)="
+      chartManager.updateSize(
+        chart.id,
+        resizeBox.offsetWidth,
+        resizeBox.offsetHeight
+      )
+    ">
   </span>
 </div>

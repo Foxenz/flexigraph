@@ -9,7 +9,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { ChartModel, TypeOfChart } from '../../../models/chart-model';
+import { ChartCardModel, TypeOfChart } from '../../../models/chart-model';
 import { ChartService } from '../../../../../shared/services/chart.service';
 import { MatIcon } from '@angular/material/icon';
 import { DataService } from '../../../../../shared/services/data.service';
@@ -48,7 +48,7 @@ export class DialogFormChartComponent implements OnInit {
     public dataService: DataService,
     public chartService: ChartService,
     public dialogRef: MatDialogRef<DialogFormChartComponent>,
-    @Inject(MAT_DIALOG_DATA) public initialData: { chart?: ChartModel }
+    @Inject(MAT_DIALOG_DATA) public initialData: { chart?: ChartCardModel }
   ) {
     this.dataService
       .getListOfData()

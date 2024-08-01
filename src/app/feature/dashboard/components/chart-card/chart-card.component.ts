@@ -8,7 +8,7 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { CdkDrag, CdkDragHandle, DragAxis } from '@angular/cdk/drag-drop';
-import { ChartModel } from '../../models/chart-model';
+import { ChartCardModel } from '../../models/chart-model';
 import { ChartData } from 'chart.js/auto';
 import { ChartComponent } from './chart/chart.component';
 import { NgClass, NgStyle } from '@angular/common';
@@ -22,7 +22,7 @@ import { ChartManager } from '../../../../shared/managers/chart.manager';
   styleUrl: './chart-card.component.scss',
 })
 export class ChartCardComponent implements OnInit, AfterViewInit {
-  @Input() chart!: ChartModel;
+  @Input() chart!: ChartCardModel;
   @ViewChild('resizeBox') resizeBox!: ElementRef;
   @ViewChild('dragHandleCorner') dragHandleCorner!: ElementRef;
   @ViewChild('dragHandleRight') dragHandleRight!: ElementRef;
@@ -122,8 +122,9 @@ export class ChartCardComponent implements OnInit, AfterViewInit {
     const dragRect = dragHandle.getBoundingClientRect();
     const targetRect = target.getBoundingClientRect();
 
-    const width = dragRect.left - targetRect.left + dragRect.width;
-    const height = dragRect.top - targetRect.top + dragRect.height;
+    // 42 = padding + border
+    const width = dragRect.left - targetRect.left + dragRect.width - 42;
+    const height = dragRect.top - targetRect.top + dragRect.height - 42;
 
     target.style.width = width + 'px';
     target.style.height = height + 'px';
