@@ -1,6 +1,6 @@
 <div
+  #resizeBox
   class="box"
-  [ngClass]="chart.type.value"
   [ngStyle]="{ 'z-index': chart.zIndex }"
   cdkDragBoundary=".zone-draggable"
   cdkDrag
@@ -23,4 +23,12 @@
       <path d="M0 0h24v24H0z" fill="none"></path>
     </svg>
   </div>
+
+  <span
+    #dragHandleCorner
+    [cdkDragLockAxis]="lockAxis"
+    class="dragCorner"
+    cdkDrag
+    (cdkDragMoved)="dragMove(dragHandleCorner)">
+  </span>
 </div>

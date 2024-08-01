@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import Chart, { ChartData } from 'chart.js/auto';
 import { TypeOfChart } from '../../../models/chart-model';
 
@@ -7,10 +7,10 @@ import { TypeOfChart } from '../../../models/chart-model';
   standalone: true,
   imports: [],
   templateUrl: './chart.component.html',
-  styleUrl: './chart.component.scss',
+  styleUrls: ['./chart.component.scss'],
 })
-export class ChartComponent implements OnInit {
-  public chart!: unknown;
+export class ChartComponent implements OnInit, OnDestroy {
+  public chart!: Chart;
 
   @Input() chartId!: string;
   @Input() chartData!: ChartData;
@@ -22,6 +22,12 @@ export class ChartComponent implements OnInit {
     }, 1);
   }
 
+  ngOnDestroy(): void {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+  }
+
   createChart(
     chartId: string,
     chartData: ChartData,
@@ -29,9 +35,10 @@ export class ChartComponent implements OnInit {
   ): void {
     this.chart = new Chart(chartId, {
       type: chartType.value,
-      data: {
-        labels: chartData.labels,
-        datasets: chartData.datasets,
+      data: chartData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
       },
     });
   }
