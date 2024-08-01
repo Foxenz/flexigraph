@@ -222,6 +222,6 @@ export class DataService {
   constructor() {}
 
   public getListOfData(): Observable<ListOfData[]> {
-    return of(this.listOfDataEducation.listOfData);
+    return of(this.listOfDataBusiness.listOfData);
   }
 }
