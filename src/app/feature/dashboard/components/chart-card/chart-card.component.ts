@@ -1,5 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import {
+  Component,
+  ElementRef,
+  Input,
+  NgZone,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
+import { CdkDrag, CdkDragHandle, DragAxis } from '@angular/cdk/drag-drop';
 import { ChartModel } from '../../models/chart-model';
 import { ChartData } from 'chart.js/auto';
 import { ChartComponent } from './chart/chart.component';
@@ -13,23 +21,28 @@ import { ChartManager } from '../../../../shared/managers/chart.manager';
   templateUrl: './chart-card.component.html',
   styleUrl: './chart-card.component.scss',
 })
-export class ChartCardComponent implements OnInit {
+export class ChartCardComponent implements OnInit, AfterViewInit {
   @Input() chart!: ChartModel;
+  @ViewChild('resizeBox') resizeBox!: ElementRef;
+  @ViewChild('dragHandleCorner') dragHandleCorner!: ElementRef;
+  @ViewChild('dragHandleRight') dragHandleRight!: ElementRef;
+  @ViewChild('dragHandleBottom') dragHandleBottom!: ElementRef;
+  lockAxis!: DragAxis;
 
   chartData: ChartData = {
     labels: [
-      'Janvier',
-      'Février',
-      'Mars',
-      'Avril',
+      'Jan',
+      'Fév',
+      'Mar',
+      'Avr',
       'Mai',
-      'Juin',
-      'Juillet',
-      'Aout',
-      'Septembre',
-      'Octobre',
-      'Novembre',
-      'Décembre',
+      'Jui',
+      'Juil',
+      'Aou',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Déc',
     ],
     datasets: [],
   };
@@ -48,7 +61,10 @@ export class ChartCardComponent implements OnInit {
   ];
   biggestChart: string[] = ['doughnut', 'pie', 'polarArea', 'radar'];
 
-  constructor(public chartManager: ChartManager) {}
+  constructor(
+    public chartManager: ChartManager,
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit(): void {
     this.chart.data.forEach((data, index) => {
@@ -63,5 +79,55 @@ export class ChartCardComponent implements OnInit {
           : this.chartColors[index],
       });
     });
+  }
+
+  get resizeBoxElement(): HTMLElement {
+    return this.resizeBox.nativeElement;
+  }
+
+  get dragHandleCornerElement(): HTMLElement {
+    return this.dragHandleCorner.nativeElement;
+  }
+
+  ngAfterViewInit() {
+    this.setAllHandleTransform();
+  }
+
+  setAllHandleTransform() {
+    const rect = this.resizeBoxElement.getBoundingClientRect();
+    this.setHandleTransform(this.dragHandleCornerElement, rect, 'both');
+  }
+
+  setHandleTransform(
+    dragHandle: HTMLElement,
+    targetRect: DOMRect,
+    position: 'x' | 'y' | 'both'
+  ) {
+    const dragRect = dragHandle.getBoundingClientRect();
+    const translateX = targetRect.width - dragRect.width;
+    const translateY = targetRect.height - dragRect.height;
+
+    if (position === 'both') {
+      dragHandle.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
+    }
+  }
+
+  dragMove(dragHandle: HTMLElement) {
+    this.ngZone.runOutsideAngular(() => {
+      this.resize(dragHandle, this.resizeBoxElement);
+    });
+  }
+
+  resize(dragHandle: HTMLElement, target: HTMLElement) {
+    const dragRect = dragHandle.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+
+    const width = dragRect.left - targetRect.left + dragRect.width;
+    const height = dragRect.top - targetRect.top + dragRect.height;
+
+    target.style.width = width + 'px';
+    target.style.height = height + 'px';
+
+    this.setAllHandleTransform();
   }
 }

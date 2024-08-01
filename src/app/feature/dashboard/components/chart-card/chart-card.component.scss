@@ -1,8 +1,5 @@
 .box {
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 600px;
   height: 400px;
   padding: 20px;
@@ -14,25 +11,35 @@
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
   0 2px 2px 0 rgba(0, 0, 0, 0.14),
   0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+
+  &:active {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  .handle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #ccc;
+    cursor: move;
+    width: 24px;
+    height: 24px;
+  }
+
+  .dragCorner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: lightgray;
+    width: 15px;
+    height: 15px;
+    border-radius: 4px;
+    cursor: nwse-resize;
+  }
 }
 
-.box:active {
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-  0 8px 10px 1px rgba(0, 0, 0, 0.14),
-  0 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
 
-.handle {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: #ccc;
-  cursor: move;
-  width: 24px;
-  height: 24px;
-}
 
-.doughnut, .radar, .pie, .polarArea {
-  width: 500px;
-  height: 600px;
-}
