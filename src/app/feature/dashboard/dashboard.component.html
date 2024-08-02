@@ -13,8 +13,18 @@
       [opened]="true"
       fixedTopGap="56">
       <!-- Liste de tous les graphiques crée -->
-      <div class="list">
-        <app-chart-list />
+      <div class="side-container">
+        <div class="list">
+          <app-chart-list />
+        </div>
+
+        <button
+          class="create-button"
+          mat-flat-button
+          color="primary"
+          (click)="openDialog()">
+          Créer un graphique
+        </button>
       </div>
     </mat-sidenav>
 
