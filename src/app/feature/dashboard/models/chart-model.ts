@@ -1,7 +1,7 @@
 import { ChartType } from 'chart.js/auto';
 import { Data } from '../../../shared/models/data-model';
 
-export interface ChartModel {
+export interface ChartCardModel {
   id: string;
   title: string;
   type: TypeOfChart;
@@ -9,6 +9,7 @@ export interface ChartModel {
   visible: boolean;
   zIndex: number;
   position: { x: number; y: number };
+  size: { width: number; height: number };
 }
 
 // Interface pour stocker les données d'un seul chart
@@ -17,6 +18,7 @@ export interface OneChartData {
   data: Data;
 }
 
+// Interface pour les types de chart et leur valeur à afficher
 export interface TypeOfChart {
   value: ChartType;
   viewValue: string;

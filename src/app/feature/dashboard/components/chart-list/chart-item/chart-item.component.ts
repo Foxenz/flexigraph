@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { ChartModel } from '../../../models/chart-model';
+import { ChartCardModel } from '../../../models/chart-model';
 import {
   MatCard,
   MatCardActions,
@@ -27,12 +27,12 @@ import { DialogFormChartComponent } from '../../dialogs/dialog-chart/dialog-form
   styleUrl: './chart-item.component.scss',
 })
 export class ChartItemComponent {
-  @Input() chart!: ChartModel;
+  @Input() chart!: ChartCardModel;
   readonly dialog = inject(MatDialog);
 
-  @Output() public changeVisibility = new EventEmitter<ChartModel>();
-  @Output() public updateChart = new EventEmitter<ChartModel>();
-  @Output() public deleteChart = new EventEmitter<ChartModel>();
+  @Output() public changeVisibility = new EventEmitter<ChartCardModel>();
+  @Output() public updateChart = new EventEmitter<ChartCardModel>();
+  @Output() public deleteChart = new EventEmitter<ChartCardModel>();
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogDeleteChartComponent, {

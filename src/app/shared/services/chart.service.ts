@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  ChartModel,
+  ChartCardModel,
   TypeOfChart,
 } from '../../feature/dashboard/models/chart-model';
 import { Observable, of } from 'rxjs';
@@ -12,7 +12,7 @@ import { ListOfData } from '../models/data-model';
 })
 export class ChartService {
   public listOfData!: ListOfData[];
-  private readonly charts: ChartModel[] = [];
+  private readonly charts: ChartCardModel[] = [];
   private readonly listOfTypesChart: TypeOfChart[] = [
     { value: 'bar', viewValue: 'Bâtonnet' },
     { value: 'line', viewValue: 'Linéaire' },
@@ -28,7 +28,7 @@ export class ChartService {
     // A supprimer à la fin
     this.charts.push({
       id: '0270b747',
-      title: 'Taux de conversion Physique vs Online',
+      title: 'Graphique n°1',
       type: this.listOfTypesChart[0],
       data: [
         { year: 2022, data: this.listOfData[0].data[1] },
@@ -37,11 +37,12 @@ export class ChartService {
       visible: true,
       zIndex: 0,
       position: { x: 0, y: 0 },
+      size: { width: 600, height: 400 },
     });
 
     this.charts.push({
       id: '0220b743',
-      title: "Chiffre d'affaire",
+      title: 'Graphique n°2',
       type: this.listOfTypesChart[1],
       data: [
         { year: this.listOfData[0].year, data: this.listOfData[0].data[0] },
@@ -49,11 +50,12 @@ export class ChartService {
       visible: false,
       zIndex: 0,
       position: { x: 0, y: 0 },
+      size: { width: 600, height: 400 },
     });
 
     this.charts.push({
       id: '0420b652',
-      title: 'Nombre de clients',
+      title: 'Graphique n°3',
       type: this.listOfTypesChart[2],
       data: [
         { year: this.listOfData[1].year, data: this.listOfData[1].data[3] },
@@ -62,10 +64,11 @@ export class ChartService {
       visible: false,
       zIndex: 0,
       position: { x: 0, y: 0 },
+      size: { width: 600, height: 400 },
     });
   }
 
-  public getCharts(): Observable<ChartModel[]> {
+  public getCharts(): Observable<ChartCardModel[]> {
     return of(this.charts);
   }
 

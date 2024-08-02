@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ChartItemComponent } from './chart-item/chart-item.component';
-import { ChartModel } from '../../models/chart-model';
+import { ChartCardModel } from '../../models/chart-model';
 import { MatFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { filter } from 'rxjs';
@@ -29,19 +29,19 @@ export class ChartListComponent {
       .subscribe(result => this.createChart(result));
   }
 
-  createChart(chart: ChartModel) {
+  createChart(chart: ChartCardModel) {
     this.chartManager.createChart(chart);
   }
 
-  changeVisibility(chart: ChartModel): void {
+  changeVisibility(chart: ChartCardModel): void {
     this.chartManager.switchVisibility(chart.id);
   }
 
-  updateChart(chart: ChartModel): void {
+  updateChart(chart: ChartCardModel): void {
     this.chartManager.updateChart(chart);
   }
 
-  deleteChart(chart: ChartModel): void {
+  deleteChart(chart: ChartCardModel): void {
     this.chartManager.deleteChart(chart.id);
   }
 }
