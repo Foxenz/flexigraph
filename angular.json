@@ -107,7 +107,11 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/flexigraph/",
+            "repo": "https://github.com/Foxenz/flexigraph.git"
+          }
         }
       }
     }
