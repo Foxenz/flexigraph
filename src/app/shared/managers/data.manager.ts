@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ToasterService } from '../services/toaster.service';
 import { DataService } from '../services/data.service';
-import { Data, ListOfData } from '../models/data-model';
+import { Data, ListOfData, TypeOfData } from '../models/data-model';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class DataManager {
@@ -64,5 +65,11 @@ export class DataManager {
     dataForYear.data.splice(index, 1);
 
     this.toasterService.successMessage('Data supprimée avec succès');
+  }
+
+  public changeSelectedTypeOfListOfData(value: TypeOfData) {
+    this.listOfData = this.dataService.changeSelectedTypeOfListOfData(value);
+
+    this.toasterService.successMessage('Type de données modifié avec succès');
   }
 }

@@ -20,11 +20,12 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { DataManager } from '../../shared/managers/data.manager';
-import { Data } from '../../shared/models/data-model';
+import { Data, TypeOfData } from '../../shared/models/data-model';
 import { filter } from 'rxjs';
 import { DialogFormDataComponent } from './dialogs/dialog-form-data/dialog-form-data.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteDataComponent } from './dialogs/dialog-delete-data/dialog-delete-data.component';
+import { DataService } from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-data-management',
@@ -148,5 +149,13 @@ export class DataManagementComponent {
       .afterClosed()
       .pipe(filter(element => element != undefined))
       .subscribe(result => this.deleteData(result));
+  }
+
+  dataType: TypeOfData = 'association';
+  changeData() {
+    this.dataManager.changeSelectedTypeOfListOfData(this.dataType);
+    this.initializeAvailableYears();
+    this.selectedYear = this.availableYears[0];
+    this.initializeDataSource();
   }
 }

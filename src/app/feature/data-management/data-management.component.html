@@ -1,8 +1,10 @@
 <app-navbar></app-navbar>
 
 <div style="padding: 50px">
+  <p (click)="changeData()">test</p>
+
   <mat-form-field appearance="outline">
-    <mat-label>Select Year</mat-label>
+    <mat-label>Séléctionner une année</mat-label>
     <mat-select
       [(value)]="selectedYear"
       (selectionChange)="onYearChange($event.value)">

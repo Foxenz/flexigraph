@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ListOfData, TypeOfListOfData } from '../models/data-model';
+import { ListOfData, TypeOfData, TypeOfListOfData } from '../models/data-model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -219,9 +219,29 @@ export class DataService {
     ],
   };
 
+  private selectedTypeOfListOfData: TypeOfListOfData = this.listOfDataBusiness;
+
   constructor() {}
 
   public getListOfData(): Observable<ListOfData[]> {
-    return of(this.listOfDataBusiness.listOfData);
+    return of(this.selectedTypeOfListOfData.listOfData);
+  }
+
+  public changeSelectedTypeOfListOfData(
+    typeOfListOfData: TypeOfData
+  ): ListOfData[] {
+    switch (typeOfListOfData) {
+      case 'business':
+        this.selectedTypeOfListOfData = this.listOfDataBusiness;
+        break;
+      case 'association':
+        this.selectedTypeOfListOfData = this.listOfDataAssociation;
+        break;
+      case 'education':
+        this.selectedTypeOfListOfData = this.listOfDataEducation;
+        break;
+    }
+
+    return this.selectedTypeOfListOfData.listOfData;
   }
 }
