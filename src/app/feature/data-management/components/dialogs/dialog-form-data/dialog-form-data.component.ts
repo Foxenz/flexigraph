@@ -5,7 +5,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { Data } from '../../../../shared/models/data-model';
+import { Data } from '../../../../../shared/models/data-model';
 import {
   FormBuilder,
   FormsModule,

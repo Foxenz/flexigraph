@@ -76,7 +76,6 @@ export class DataService {
       },
     ],
   };
-
   private readonly listOfDataAssociation: TypeOfListOfData = {
     value: 'association',
     viewValue: 'Association',
@@ -147,7 +146,6 @@ export class DataService {
       },
     ],
   };
-
   private readonly listOfDataEducation: TypeOfListOfData = {
     value: 'education',
     viewValue: 'Éducation',
@@ -219,29 +217,47 @@ export class DataService {
     ],
   };
 
-  private selectedTypeOfListOfData: TypeOfListOfData = this.listOfDataBusiness;
+  private readonly listOfTypeOfData: TypeOfData[] = [
+    { value: 'business', viewValue: 'Business' },
+    { value: 'association', viewValue: 'Association' },
+    { value: 'education', viewValue: 'Éducation' },
+  ];
+
+  private selectedListOfData: TypeOfListOfData = this.listOfDataBusiness;
+  private selectedTypeOfData: TypeOfData = this.listOfTypeOfData[0];
 
   constructor() {}
 
   public getListOfData(): Observable<ListOfData[]> {
-    return of(this.selectedTypeOfListOfData.listOfData);
+    return of(this.selectedListOfData.listOfData);
   }
 
   public changeSelectedTypeOfListOfData(
     typeOfListOfData: TypeOfData
   ): ListOfData[] {
-    switch (typeOfListOfData) {
+    switch (typeOfListOfData.value) {
       case 'business':
-        this.selectedTypeOfListOfData = this.listOfDataBusiness;
+        this.selectedListOfData = this.listOfDataBusiness;
+        this.selectedTypeOfData = this.listOfTypeOfData[0];
         break;
       case 'association':
-        this.selectedTypeOfListOfData = this.listOfDataAssociation;
+        this.selectedListOfData = this.listOfDataAssociation;
+        this.selectedTypeOfData = this.listOfTypeOfData[1];
         break;
       case 'education':
-        this.selectedTypeOfListOfData = this.listOfDataEducation;
+        this.selectedListOfData = this.listOfDataEducation;
+        this.selectedTypeOfData = this.listOfTypeOfData[2];
         break;
     }
 
-    return this.selectedTypeOfListOfData.listOfData;
+    return this.selectedListOfData.listOfData;
+  }
+
+  getListOfTypeOfData(): TypeOfData[] {
+    return this.listOfTypeOfData;
+  }
+
+  getSelectedTypeOfData(): TypeOfData {
+    return this.selectedTypeOfData;
   }
 }

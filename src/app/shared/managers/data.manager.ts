@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { ToasterService } from '../services/toaster.service';
 import { DataService } from '../services/data.service';
 import { Data, ListOfData, TypeOfData } from '../models/data-model';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class DataManager {
   public listOfData!: ListOfData[];
+  public listOfTypeOfData!: TypeOfData[];
+  public selectedTypeOfData!: TypeOfData;
 
   constructor(
     private dataService: DataService,
@@ -15,6 +16,9 @@ export class DataManager {
     this.dataService
       .getListOfData()
       .subscribe(data => (this.listOfData = data));
+
+    this.listOfTypeOfData = this.dataService.getListOfTypeOfData();
+    this.selectedTypeOfData = this.dataService.getSelectedTypeOfData();
   }
 
   public getAvailableYears(): number[] {
@@ -69,6 +73,7 @@ export class DataManager {
 
   public changeSelectedTypeOfListOfData(value: TypeOfData) {
     this.listOfData = this.dataService.changeSelectedTypeOfListOfData(value);
+    this.selectedTypeOfData = value;
 
     this.toasterService.successMessage('Type de données modifié avec succès');
   }

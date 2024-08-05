@@ -22,10 +22,10 @@ import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { DataManager } from '../../shared/managers/data.manager';
 import { Data, TypeOfData } from '../../shared/models/data-model';
 import { filter } from 'rxjs';
-import { DialogFormDataComponent } from './dialogs/dialog-form-data/dialog-form-data.component';
+import { DialogFormDataComponent } from './components/dialogs/dialog-form-data/dialog-form-data.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogDeleteDataComponent } from './dialogs/dialog-delete-data/dialog-delete-data.component';
-import { DataService } from '../../shared/services/data.service';
+import { DialogDeleteDataComponent } from './components/dialogs/dialog-delete-data/dialog-delete-data.component';
+import { DialogSwitchTypeOfDataComponent } from './components/dialogs/dialog-switch-type-of-data/dialog-switch-type-of-data.component';
 
 @Component({
   selector: 'app-data-management',
@@ -63,6 +63,8 @@ export class DataManagementComponent {
   dataSource: Data[] = [];
   availableYears: number[] = [];
   selectedYear: number;
+  listOfTypeOfData!: TypeOfData[];
+
   @ViewChild(MatTable) table!: MatTable<Data>;
   readonly dialog = inject(MatDialog);
 
@@ -151,9 +153,22 @@ export class DataManagementComponent {
       .subscribe(result => this.deleteData(result));
   }
 
-  dataType: TypeOfData = 'association';
-  changeData() {
-    this.dataManager.changeSelectedTypeOfListOfData(this.dataType);
+  openSwitchTypOfDataDialog() {
+    const dialogRef = this.dialog.open(DialogSwitchTypeOfDataComponent, {
+      data: {
+        typeOfDataSelected: this.dataManager.selectedTypeOfData,
+        listOfTypeOfData: this.dataManager.listOfTypeOfData,
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(filter(element => element != undefined))
+      .subscribe(result => this.changeData(result));
+  }
+
+  changeData(typeOfData: TypeOfData) {
+    this.dataManager.changeSelectedTypeOfListOfData(typeOfData);
     this.initializeAvailableYears();
     this.selectedYear = this.availableYears[0];
     this.initializeDataSource();
