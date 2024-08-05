@@ -164,4 +164,8 @@ export class ChartManager {
       chart.size = { width: offsetWidth - 42, height: offsetHeight - 42 };
     }
   }
+
+  deleteAllCharts() {
+    this.charts.splice(0, this.charts.length);
+  }
 }

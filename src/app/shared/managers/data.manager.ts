@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToasterService } from '../services/toaster.service';
 import { DataService } from '../services/data.service';
 import { Data, ListOfData, TypeOfData } from '../models/data-model';
+import { ChartManager } from './chart.manager';
 
 @Injectable()
 export class DataManager {
@@ -11,7 +12,8 @@ export class DataManager {
 
   constructor(
     private dataService: DataService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private chartManager: ChartManager
   ) {
     this.dataService
       .getListOfData()
@@ -74,6 +76,8 @@ export class DataManager {
   public changeSelectedTypeOfListOfData(value: TypeOfData) {
     this.listOfData = this.dataService.changeSelectedTypeOfListOfData(value);
     this.selectedTypeOfData = value;
+
+    this.chartManager.deleteAllCharts();
 
     this.toasterService.successMessage('Type de données modifié avec succès');
   }
